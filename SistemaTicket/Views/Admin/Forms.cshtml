@@ -1,0 +1,180 @@
+@{
+    ViewData["Title"] = "Formularios";
+    ViewData["Breadcrumb"] = "6.8 Formularios";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="flex items-center justify-between mb-6">
+    <div>
+        <h1 class="text-xl font-bold text-gray-900">📋 Formularios</h1>
+        <p class="text-sm text-gray-500 mt-0.5">Admin Panel › Manage › Forms</p>
+    </div>
+    <button class="btn-primary btn-sm">+ Nuevo Formulario</button>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+    <!-- Forms list -->
+    <div class="lg:col-span-1 space-y-2">
+        <div class="card divide-y divide-gray-50 overflow-hidden">
+            <button class="w-full text-left px-4 py-3 bg-indigo-50 transition-colors">
+                <div class="text-sm font-semibold text-indigo-700">Ticket Details</div>
+                <div class="text-xs text-indigo-400 mt-0.5">7 campos · Activo</div>
+            </button>
+            <button class="w-full text-left px-4 py-3 hover:bg-slate-50 transition-colors">
+                <div class="text-sm font-medium text-gray-700">Contact Info</div>
+                <div class="text-xs text-gray-400 mt-0.5">5 campos</div>
+            </button>
+            <button class="w-full text-left px-4 py-3 hover:bg-slate-50 transition-colors">
+                <div class="text-sm font-medium text-gray-700">Solicitud Hardware</div>
+                <div class="text-xs text-gray-400 mt-0.5">4 campos</div>
+            </button>
+            <button class="w-full text-left px-4 py-3 hover:bg-slate-50 transition-colors">
+                <div class="text-sm font-medium text-gray-700">Reporte de Falla</div>
+                <div class="text-xs text-gray-400 mt-0.5">6 campos</div>
+            </button>
+        </div>
+
+        <!-- Field types reference -->
+        <div class="card p-4">
+            <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Tipos de campo</h3>
+            <ul class="space-y-1.5 text-xs text-gray-600">
+                <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-indigo-400 flex-shrink-0"></span>Short Answer</li>
+                <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-indigo-400 flex-shrink-0"></span>Long Answer</li>
+                <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-sky-400 flex-shrink-0"></span>Date / Datetime</li>
+                <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-sky-400 flex-shrink-0"></span>Phone Number</li>
+                <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 flex-shrink-0"></span>Checkbox</li>
+                <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 flex-shrink-0"></span>Choices</li>
+                <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0"></span>Multi-select</li>
+                <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0"></span>File Upload</li>
+                <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-gray-300 flex-shrink-0"></span>Section Break</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Field editor + preview -->
+    <div class="lg:col-span-3 space-y-4">
+        <!-- Fields table -->
+        <div class="card overflow-hidden">
+            <div class="flex items-center justify-between px-5 py-3 border-b border-gray-100">
+                <span class="text-sm font-semibold text-gray-700">Campos: Ticket Details</span>
+                <button class="btn-secondary btn-sm">+ Agregar Campo</button>
+            </div>
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="bg-slate-50 border-b border-gray-100">
+                        <th class="table-th w-8">#</th>
+                        <th class="table-th">Label</th>
+                        <th class="table-th">Variable</th>
+                        <th class="table-th">Tipo</th>
+                        <th class="table-th">Requerido</th>
+                        <th class="table-th">Visibilidad</th>
+                        <th class="table-th"></th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-50">
+                    <tr class="hover:bg-slate-50/60">
+                        <td class="table-td text-gray-400">1</td>
+                        <td class="table-td font-semibold text-gray-800">Asunto</td>
+                        <td class="table-td"><code class="text-xs bg-slate-100 px-1.5 py-0.5 rounded text-indigo-600">subject</code></td>
+                        <td class="table-td text-gray-500 text-xs">Short Answer</td>
+                        <td class="table-td"><span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700">Sí</span></td>
+                        <td class="table-td text-gray-500 text-xs">Always</td>
+                        <td class="table-td"><button class="text-gray-400 hover:text-indigo-600 transition-colors">✏️</button></td>
+                    </tr>
+                    <tr class="hover:bg-slate-50/60">
+                        <td class="table-td text-gray-400">2</td>
+                        <td class="table-td font-semibold text-gray-800">Descripción del problema</td>
+                        <td class="table-td"><code class="text-xs bg-slate-100 px-1.5 py-0.5 rounded text-indigo-600">message</code></td>
+                        <td class="table-td text-gray-500 text-xs">Long Answer</td>
+                        <td class="table-td"><span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700">Sí</span></td>
+                        <td class="table-td text-gray-500 text-xs">Always</td>
+                        <td class="table-td"><button class="text-gray-400 hover:text-indigo-600 transition-colors">✏️</button></td>
+                    </tr>
+                    <tr class="hover:bg-slate-50/60">
+                        <td class="table-td text-gray-400">3</td>
+                        <td class="table-td font-semibold text-gray-800">Archivos adjuntos</td>
+                        <td class="table-td"><code class="text-xs bg-slate-100 px-1.5 py-0.5 rounded text-indigo-600">attachments</code></td>
+                        <td class="table-td text-gray-500 text-xs">File Upload</td>
+                        <td class="table-td"><span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500">No</span></td>
+                        <td class="table-td text-gray-500 text-xs">Always</td>
+                        <td class="table-td"><button class="text-gray-400 hover:text-indigo-600 transition-colors">✏️</button></td>
+                    </tr>
+                    <tr class="hover:bg-slate-50/60">
+                        <td class="table-td text-gray-400">4</td>
+                        <td class="table-td font-semibold text-gray-800">Número de equipo</td>
+                        <td class="table-td"><code class="text-xs bg-slate-100 px-1.5 py-0.5 rounded text-indigo-600">equipment_id</code></td>
+                        <td class="table-td text-gray-500 text-xs">Short Answer</td>
+                        <td class="table-td"><span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500">No</span></td>
+                        <td class="table-td text-gray-500 text-xs">On Create</td>
+                        <td class="table-td"><button class="text-gray-400 hover:text-indigo-600 transition-colors">✏️</button></td>
+                    </tr>
+                    <tr class="hover:bg-slate-50/60">
+                        <td class="table-td text-gray-400">5</td>
+                        <td class="table-td font-semibold text-gray-800">Sistema operativo</td>
+                        <td class="table-td"><code class="text-xs bg-slate-100 px-1.5 py-0.5 rounded text-indigo-600">os</code></td>
+                        <td class="table-td text-gray-500 text-xs">Choices</td>
+                        <td class="table-td"><span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500">No</span></td>
+                        <td class="table-td text-gray-500 text-xs">On Create</td>
+                        <td class="table-td"><button class="text-gray-400 hover:text-indigo-600 transition-colors">✏️</button></td>
+                    </tr>
+                    <tr class="hover:bg-slate-50/60">
+                        <td class="table-td text-gray-400">6</td>
+                        <td class="table-td font-semibold text-gray-800">Urgencia declarada</td>
+                        <td class="table-td"><code class="text-xs bg-slate-100 px-1.5 py-0.5 rounded text-indigo-600">urgency</code></td>
+                        <td class="table-td text-gray-500 text-xs">Choices</td>
+                        <td class="table-td"><span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500">No</span></td>
+                        <td class="table-td text-gray-500 text-xs">Always</td>
+                        <td class="table-td"><button class="text-gray-400 hover:text-indigo-600 transition-colors">✏️</button></td>
+                    </tr>
+                    <tr class="hover:bg-slate-50/60">
+                        <td class="table-td text-gray-400">7</td>
+                        <td class="table-td font-semibold text-gray-800">Nota interna cierre</td>
+                        <td class="table-td"><code class="text-xs bg-slate-100 px-1.5 py-0.5 rounded text-indigo-600">close_note</code></td>
+                        <td class="table-td text-gray-500 text-xs">Long Answer</td>
+                        <td class="table-td"><span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500">No</span></td>
+                        <td class="table-td text-gray-500 text-xs">Staff Only</td>
+                        <td class="table-td"><button class="text-gray-400 hover:text-indigo-600 transition-colors">✏️</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Form preview -->
+        <div class="card p-5 border-l-4 border-sky-400">
+            <h3 class="text-sm font-semibold text-gray-700 mb-4">Vista previa del formulario</h3>
+            <div class="space-y-3 opacity-70 pointer-events-none">
+                <div>
+                    <label class="form-label">Asunto <span class="text-red-500">*</span></label>
+                    <input type="text" class="form-input" placeholder="Resumen del problema" disabled />
+                </div>
+                <div>
+                    <label class="form-label">Descripción del problema <span class="text-red-500">*</span></label>
+                    <textarea class="form-input" rows="3" placeholder="Describe el problema en detalle..." disabled></textarea>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="form-label">Sistema operativo</label>
+                        <select class="form-select" disabled>
+                            <option>Windows 11</option>
+                            <option>Windows 10</option>
+                            <option>macOS Sequoia</option>
+                            <option>Ubuntu 24.04</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label">Urgencia declarada</label>
+                        <select class="form-select" disabled>
+                            <option>Baja</option>
+                            <option>Normal</option>
+                            <option>Alta</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="form-label">Archivos adjuntos</label>
+                    <input type="file" class="form-input" disabled />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

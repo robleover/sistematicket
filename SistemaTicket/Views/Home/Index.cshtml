@@ -1,0 +1,153 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SistemaTicket — Soporte</title>
+    <link rel="preload" href="/img/f1.mp4" as="video" type="video/mp4" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: { extend: { colors: { brand: { DEFAULT: '#6366f1', dark: '#4f46e5' } } } }
+        }
+    </script>
+</head>
+<body class="min-h-screen bg-purple-100 flex flex-col">
+
+    <!-- Topbar -->
+    <header class="bg-[#1e1b4b] text-white shadow">
+        <div class="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="text-2xl">🎫</span>
+                <span class="font-bold text-lg tracking-tight">SistemaTicket</span>
+            </div>
+            <nav class="flex items-center gap-4 text-sm">
+                <a href="/Home/Login" class="text-indigo-200 hover:text-white transition-colors">Iniciar sesión</a>
+                <a href="/Home/Login" class="px-4 py-1.5 rounded-lg bg-indigo-500 hover:bg-indigo-400 text-white font-medium transition-colors">Panel de agente</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero con video -->
+    <section class="relative text-white overflow-hidden bg-indigo-800" style="height:340px">
+        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover">
+            <source src="/img/f1.mp4" type="video/mp4" />
+        </video>
+        <div class="absolute inset-0 bg-[#1e1b4b]/65"></div>
+        <div class="relative z-10 h-full flex flex-col items-center justify-center px-4 text-center max-w-2xl mx-auto">
+            <h1 class="text-3xl font-bold mb-2">¿En qué podemos ayudarte?</h1>
+            <p class="text-indigo-200 text-sm mb-6">Bienvenido al centro de soporte. Busca en nuestra base de conocimientos o abre un nuevo ticket.</p>
+            <div class="flex gap-2 w-full max-w-lg">
+                <input type="search" placeholder="Buscar artículos, guías, soluciones..."
+                    class="flex-1 rounded-xl border-0 px-4 py-3 text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white shadow" />
+                <button class="px-5 py-3 rounded-xl bg-indigo-600 text-white font-semibold text-sm hover:bg-indigo-700 transition-colors shadow">Buscar</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Acciones principales -->
+    <section class="max-w-4xl mx-auto px-4 w-full -mt-8">
+        <div class="grid grid-cols-2 gap-4">
+            <a href="/Home/Login?returnUrl=/Portal/NewTicket" class="relative overflow-hidden rounded-2xl shadow-xl group">
+                <div class="absolute inset-0 bg-gradient-to-br from-indigo-700 to-violet-800 transition-all group-hover:from-indigo-800 group-hover:to-violet-900"></div>
+                <div class="absolute inset-0 bg-white/20"></div>
+                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] bg-[length:20px_20px]"></div>
+                <div class="relative z-10 p-8 flex items-center gap-6">
+                    <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur flex items-center justify-center text-4xl flex-shrink-0 group-hover:scale-110 transition-transform">🎫</div>
+                    <div class="text-white">
+                        <h2 class="text-xl font-bold mb-1">Abrir un nuevo ticket</h2>
+                        <p class="text-indigo-100 text-sm">Reporta un problema o solicita asistencia técnica</p>
+                        <span class="inline-flex items-center gap-1 mt-3 text-xs font-semibold bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full transition-colors">Comenzar →</span>
+                    </div>
+                </div>
+            </a>
+            <a href="/Home/Login?returnUrl=/Portal/MyTickets" class="relative overflow-hidden rounded-2xl shadow-xl group">
+                <div class="absolute inset-0 bg-gradient-to-br from-sky-700 to-cyan-800 transition-all group-hover:from-sky-800 group-hover:to-cyan-900"></div>
+                <div class="absolute inset-0 bg-white/20"></div>
+                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] bg-[length:20px_20px]"></div>
+                <div class="relative z-10 p-8 flex items-center gap-6">
+                    <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur flex items-center justify-center text-4xl flex-shrink-0 group-hover:scale-110 transition-transform">📋</div>
+                    <div class="text-white">
+                        <h2 class="text-xl font-bold mb-1">Ver estado de tickets</h2>
+                        <p class="text-sky-100 text-sm">Consulta el estado de tus solicitudes existentes</p>
+                        <span class="inline-flex items-center gap-1 mt-3 text-xs font-semibold bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full transition-colors">Consultar →</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Categorías -->
+    <section class="max-w-4xl mx-auto px-4 mt-8 w-full">
+        <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">Categorías de soporte</h2>
+        <div class="grid grid-cols-4 gap-3">
+            <a href="#" class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:border-indigo-200 hover:shadow transition-all group">
+                <div class="text-2xl mb-2">🛡️</div>
+                <div class="text-xs font-semibold text-gray-700">Acceso y VPN</div>
+                <div class="text-[10px] text-indigo-400 mt-1">8 artículos</div>
+            </a>
+            <a href="#" class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:border-indigo-200 hover:shadow transition-all group">
+                <div class="text-2xl mb-2">💻</div>
+                <div class="text-xs font-semibold text-gray-700">Software</div>
+                <div class="text-[10px] text-indigo-400 mt-1">12 artículos</div>
+            </a>
+            <a href="#" class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:border-indigo-200 hover:shadow transition-all group">
+                <div class="text-2xl mb-2">🖥️</div>
+                <div class="text-xs font-semibold text-gray-700">Hardware</div>
+                <div class="text-[10px] text-indigo-400 mt-1">6 artículos</div>
+            </a>
+            <a href="#" class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col items-center text-center hover:border-indigo-200 hover:shadow transition-all group">
+                <div class="text-2xl mb-2">💳</div>
+                <div class="text-xs font-semibold text-gray-700">Facturación</div>
+                <div class="text-[10px] text-indigo-400 mt-1">5 artículos</div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Anuncios + Estado del servicio -->
+    <section class="max-w-4xl mx-auto px-4 mt-6 mb-12 w-full grid grid-cols-3 gap-4">
+        <div class="col-span-2">
+            <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">Anuncios</h2>
+            <div class="space-y-3">
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+                    <div class="flex items-start gap-3">
+                        <span class="text-xl mt-0.5 flex-shrink-0">📢</span>
+                        <div>
+                            <div class="text-sm font-semibold text-gray-800">Mantenimiento programado de VPN</div>
+                            <div class="text-xs text-gray-400 mt-0.5">Viernes 20 de marzo · 22:00 – 02:00 hs. El servicio de VPN estará fuera de línea durante ese período.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+                    <div class="flex items-start gap-3">
+                        <span class="text-xl mt-0.5 flex-shrink-0">✅</span>
+                        <div>
+                            <div class="text-sm font-semibold text-gray-800">Nuevo portal de soporte disponible</div>
+                            <div class="text-xs text-gray-400 mt-0.5">Hemos renovado el portal con nuevas funciones. Puedes seguir tus tickets en tiempo real.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">Estado del servicio</h2>
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 space-y-2.5">
+                <div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></div><span class="text-xs text-gray-700 flex-1">Portal Web</span><span class="text-[10px] text-emerald-600 font-medium">Operativo</span></div>
+                <div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></div><span class="text-xs text-gray-700 flex-1">Correo</span><span class="text-[10px] text-emerald-600 font-medium">Operativo</span></div>
+                <div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-amber-400 flex-shrink-0"></div><span class="text-xs text-gray-700 flex-1">VPN Corporativa</span><span class="text-[10px] text-amber-600 font-medium">Mantenimiento</span></div>
+                <div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></div><span class="text-xs text-gray-700 flex-1">ERP Interno</span><span class="text-[10px] text-emerald-600 font-medium">Operativo</span></div>
+                <div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-red-500 flex-shrink-0"></div><span class="text-xs text-gray-700 flex-1">NAS</span><span class="text-[10px] text-red-600 font-medium">Degradado</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-auto bg-[#1e1b4b] text-indigo-300 text-xs text-center py-4">
+        © 2026 SistemaTicket — Todos los derechos reservados
+    </footer>
+
+</body>
+</html>

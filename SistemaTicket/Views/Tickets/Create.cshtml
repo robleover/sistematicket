@@ -1,0 +1,96 @@
+﻿@{
+    ViewData["Title"] = "Nuevo Ticket";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="flex items-center justify-between mb-5">
+    <div>
+        <h1 class="text-xl font-bold text-gray-900">➕ Nuevo Ticket</h1>
+        <p class="text-sm text-gray-500 mt-0.5">Sección 7.2 — Creación de tickets por agente</p>
+    </div>
+    <a asp-controller="Tickets" asp-action="Index" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-gray-200 text-sm text-gray-600 hover:bg-gray-50">← Volver</a>
+</div>
+<!-- Modo de creación -->
+<div class="grid grid-cols-2 gap-3 max-w-sm mb-6">
+    <button id="modeAgent" onclick="setMode('agent')" class="flex flex-col items-center gap-1.5 p-4 rounded-xl border-2 border-indigo-500 bg-indigo-50 text-indigo-700">
+        <span class="text-2xl">🧑‍💼</span><span class="text-sm font-semibold">Agente</span><span class="text-xs text-indigo-500">Crea por un cliente</span>
+    </button>
+    <button id="modePortal" onclick="setMode('portal')" class="flex flex-col items-center gap-1.5 p-4 rounded-xl border-2 border-gray-200 bg-white text-gray-500 hover:border-gray-300">
+        <span class="text-2xl">👤</span><span class="text-sm font-semibold">Portal cliente</span><span class="text-xs text-gray-400">Simular cliente</span>
+    </button>
+</div>
+<div class="grid grid-cols-3 gap-5">
+    <!-- Formulario principal -->
+    <div class="col-span-2 space-y-4">
+        <!-- Datos del usuario -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+            <h2 class="font-semibold text-gray-800 mb-3">👤 Datos del usuario</h2>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="col-span-2">
+                    <label class="block text-xs font-medium text-gray-600 mb-1">Buscar usuario</label>
+                    <div class="relative"><input type="text" placeholder="Email o nombre..." class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm pr-20 focus:outline-none focus:ring-2 focus:ring-indigo-300" /><button class="absolute right-2 top-1/2 -translate-y-1/2 px-2 py-1 text-xs bg-indigo-600 text-white rounded-md">Buscar</button></div>
+                </div>
+                <div><label class="block text-xs font-medium text-gray-600 mb-1">Nombre completo <span class="text-red-400">*</span></label><input type="text" placeholder="Juan Pérez" class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" /></div>
+                <div><label class="block text-xs font-medium text-gray-600 mb-1">Correo electrónico <span class="text-red-400">*</span></label><input type="email" placeholder="juan@empresa.com" class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" /></div>
+                <div><label class="block text-xs font-medium text-gray-600 mb-1">Teléfono</label><input type="text" placeholder="+54 9 11 1234-5678" class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" /></div>
+                <div><label class="block text-xs font-medium text-gray-600 mb-1">Organización</label><input type="text" placeholder="Empresa S.A." class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" /></div>
+            </div>
+        </div>
+        <!-- Detalles del ticket -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+            <h2 class="font-semibold text-gray-800 mb-3">📋 Detalles del ticket</h2>
+            <div class="space-y-3">
+                <div><label class="block text-xs font-medium text-gray-600 mb-1">Tema de ayuda <span class="text-red-400">*</span></label><select class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"><option value="">-- Seleccionar --</option><option>Soporte de acceso</option><option>Problema de software</option><option>Problema de hardware</option><option>Consulta de facturación</option></select></div>
+                <div><label class="block text-xs font-medium text-gray-600 mb-1">Asunto <span class="text-red-400">*</span></label><input type="text" placeholder="Descripción breve del problema..." class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" /></div>
+                <div>
+                    <div class="flex items-center justify-between mb-1">
+                        <label class="block text-xs font-medium text-gray-600">Descripción <span class="text-red-400">*</span></label>
+                        <button class="text-xs text-indigo-500 hover:underline">📝 Respuesta enlatada</button>
+                    </div>
+                    <textarea rows="6" placeholder="Describe el problema en detalle..." class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"></textarea>
+                </div>
+                <div><label class="block text-xs font-medium text-gray-600 mb-1">Adjuntos</label><input type="file" multiple class="block w-full text-sm text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-medium file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" /></div>
+            </div>
+        </div>
+        <!-- Nota interna opcional -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+            <h2 class="font-semibold text-gray-800 mb-3">🔒 Nota interna (opcional)</h2>
+            <textarea rows="3" placeholder="Agrega notas internas visibles solo para el equipo..." class="w-full rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-300"></textarea>
+        </div>
+    </div>
+    <!-- Panel de configuración -->
+    <div class="space-y-4">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+            <h2 class="font-semibold text-gray-800 mb-3">⚙️ Configuración</h2>
+            <div class="space-y-3">
+                <div><label class="block text-xs font-medium text-gray-600 mb-1">Departamento</label><select class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"><option>Soporte Técnico</option><option>Hardware</option><option>Facturación</option><option>RRHH</option></select></div>
+                <div><label class="block text-xs font-medium text-gray-600 mb-1">Asignar a</label><select class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"><option value="">Sin asignar</option><option>Valentina Ruiz</option><option>Matías Fernández</option><option>Sofía Morales</option><option>Diego Castillo</option></select></div>
+                <div><label class="block text-xs font-medium text-gray-600 mb-1">Equipo</label><select class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"><option value="">Sin equipo</option><option>Nivel 1</option><option>Nivel 2</option><option>Red y Comunicaciones</option></select></div>
+                <div><label class="block text-xs font-medium text-gray-600 mb-1">Prioridad</label><select class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"><option>Normal</option><option>Baja</option><option>Alta</option><option>Urgente</option></select></div>
+                <div><label class="block text-xs font-medium text-gray-600 mb-1">SLA</label><select class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"><option>Normal — 24h</option><option>Alta — 8h</option><option>Crítico — 2h</option></select></div>
+                <div><label class="block text-xs font-medium text-gray-600 mb-1">Vencimiento</label><input type="datetime-local" class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" /></div>
+            </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+            <h2 class="font-semibold text-gray-800 mb-3">📢 Notificaciones</h2>
+            <div class="space-y-2">
+                <label class="flex items-center gap-2 text-sm text-gray-600"><input type="checkbox" class="rounded text-indigo-600 focus:ring-indigo-300" checked /> Notificar al usuario</label>
+                <label class="flex items-center gap-2 text-sm text-gray-600"><input type="checkbox" class="rounded text-indigo-600 focus:ring-indigo-300" checked /> Notificar al agente</label>
+                <label class="flex items-center gap-2 text-sm text-gray-600"><input type="checkbox" class="rounded text-indigo-600 focus:ring-indigo-300" /> Confirmar al creador</label>
+            </div>
+        </div>
+        <button class="w-full py-2.5 rounded-lg bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 transition-colors">✅ Crear Ticket</button>
+    </div>
+</div>
+<script>
+function setMode(mode) {
+    var agent = document.getElementById('modeAgent');
+    var portal = document.getElementById('modePortal');
+    if (mode === 'agent') {
+        agent.className = agent.className.replace('border-gray-200 bg-white text-gray-500 hover:border-gray-300','').replace('border-indigo-500 bg-indigo-50 text-indigo-700','') + ' border-2 border-indigo-500 bg-indigo-50 text-indigo-700 flex flex-col items-center gap-1.5 p-4 rounded-xl';
+        portal.className = 'flex flex-col items-center gap-1.5 p-4 rounded-xl border-2 border-gray-200 bg-white text-gray-500 hover:border-gray-300';
+    } else {
+        portal.className = portal.className.replace('border-gray-200','') + ' border-indigo-500 bg-indigo-50 text-indigo-700 flex flex-col items-center gap-1.5 p-4 rounded-xl border-2';
+        agent.className = 'flex flex-col items-center gap-1.5 p-4 rounded-xl border-2 border-gray-200 bg-white text-gray-500 hover:border-gray-300';
+    }
+}
+</script>

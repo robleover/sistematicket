@@ -1,0 +1,174 @@
+@{
+    ViewData["Title"] = "SLA Plans";
+    ViewData["Breadcrumb"] = "6.2 SLA Plans";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="flex items-center justify-between mb-6">
+    <div>
+        <h1 class="text-xl font-bold text-gray-900">⏱️ SLA Plans</h1>
+        <p class="text-sm text-gray-500 mt-0.5">Admin Panel › Manage › SLA Plans</p>
+    </div>
+    <button onclick="document.getElementById('modalNewSLA').classList.remove('hidden')" class="btn-primary btn-sm">+ Nuevo SLA</button>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
+    <div class="card p-5 border-t-4 border-red-500">
+        <div class="flex items-start justify-between mb-2">
+            <h2 class="font-semibold text-gray-800">Crítico</h2>
+            <button class="text-gray-400 hover:text-indigo-600 transition-colors text-sm">✏️</button>
+        </div>
+        <div class="text-3xl font-bold text-red-500 mb-1">1h</div>
+        <div class="text-xs text-gray-500 mb-3">Respuesta máxima</div>
+        <div class="space-y-1 text-xs text-gray-600">
+            <div class="flex justify-between"><span>Horario</span><span class="font-medium">24/7</span></div>
+            <div class="flex justify-between"><span>Tickets activos</span><span class="font-medium">3</span></div>
+        </div>
+    </div>
+
+    <div class="card p-5 border-t-4 border-amber-500">
+        <div class="flex items-start justify-between mb-2">
+            <h2 class="font-semibold text-gray-800">Alto</h2>
+            <button class="text-gray-400 hover:text-indigo-600 transition-colors text-sm">✏️</button>
+        </div>
+        <div class="text-3xl font-bold text-amber-500 mb-1">4h</div>
+        <div class="text-xs text-gray-500 mb-3">Respuesta máxima</div>
+        <div class="space-y-1 text-xs text-gray-600">
+            <div class="flex justify-between"><span>Horario</span><span class="font-medium">Laboral</span></div>
+            <div class="flex justify-between"><span>Tickets activos</span><span class="font-medium">8</span></div>
+        </div>
+    </div>
+
+    <div class="card p-5 border-t-4 border-indigo-500">
+        <div class="flex items-start justify-between mb-2">
+            <h2 class="font-semibold text-gray-800">Normal</h2>
+            <button class="text-gray-400 hover:text-indigo-600 transition-colors text-sm">✏️</button>
+        </div>
+        <div class="text-3xl font-bold text-indigo-500 mb-1">8h</div>
+        <div class="text-xs text-gray-500 mb-3">Respuesta máxima</div>
+        <div class="space-y-1 text-xs text-gray-600">
+            <div class="flex justify-between"><span>Horario</span><span class="font-medium">Laboral</span></div>
+            <div class="flex justify-between"><span>Tickets activos</span><span class="font-medium">22</span></div>
+        </div>
+    </div>
+
+    <div class="card p-5 border-t-4 border-gray-400">
+        <div class="flex items-start justify-between mb-2">
+            <h2 class="font-semibold text-gray-800">Bajo</h2>
+            <button class="text-gray-400 hover:text-indigo-600 transition-colors text-sm">✏️</button>
+        </div>
+        <div class="text-3xl font-bold text-gray-400 mb-1">3d</div>
+        <div class="text-xs text-gray-500 mb-3">Respuesta máxima</div>
+        <div class="space-y-1 text-xs text-gray-600">
+            <div class="flex justify-between"><span>Horario</span><span class="font-medium">Laboral</span></div>
+            <div class="flex justify-between"><span>Tickets activos</span><span class="font-medium">5</span></div>
+        </div>
+    </div>
+</div>
+
+<div class="card overflow-hidden">
+    <div class="px-5 py-3 border-b border-gray-100">
+        <h2 class="text-sm font-semibold text-gray-700">📊 Cumplimiento del último mes</h2>
+    </div>
+    <table class="w-full text-sm">
+        <thead>
+            <tr class="bg-slate-50 border-b border-gray-100">
+                <th class="table-th">Plan SLA</th>
+                <th class="table-th">Tiempo límite</th>
+                <th class="table-th">Tickets cerrados</th>
+                <th class="table-th">En tiempo</th>
+                <th class="table-th">Cumplimiento</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-50">
+            <tr class="hover:bg-slate-50/60">
+                <td class="table-td"><span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700">Crítico</span></td>
+                <td class="table-td text-gray-500">1 hora / 24&ndash;7</td>
+                <td class="table-td">12</td>
+                <td class="table-td">10</td>
+                <td class="table-td">
+                    <div class="flex items-center gap-2">
+                        <div class="flex-1 bg-gray-100 rounded-full h-1.5"><div class="bg-amber-500 h-1.5 rounded-full" style="width:83%"></div></div>
+                        <span class="text-xs font-medium text-amber-600 w-8">83%</span>
+                    </div>
+                </td>
+            </tr>
+            <tr class="hover:bg-slate-50/60">
+                <td class="table-td"><span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-700">Alto</span></td>
+                <td class="table-td text-gray-500">4 horas / laboral</td>
+                <td class="table-td">28</td>
+                <td class="table-td">25</td>
+                <td class="table-td">
+                    <div class="flex items-center gap-2">
+                        <div class="flex-1 bg-gray-100 rounded-full h-1.5"><div class="bg-amber-400 h-1.5 rounded-full" style="width:89%"></div></div>
+                        <span class="text-xs font-medium text-amber-500 w-8">89%</span>
+                    </div>
+                </td>
+            </tr>
+            <tr class="hover:bg-slate-50/60">
+                <td class="table-td"><span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-700">Normal</span></td>
+                <td class="table-td text-gray-500">8 horas / laboral</td>
+                <td class="table-td">85</td>
+                <td class="table-td">80</td>
+                <td class="table-td">
+                    <div class="flex items-center gap-2">
+                        <div class="flex-1 bg-gray-100 rounded-full h-1.5"><div class="bg-emerald-500 h-1.5 rounded-full" style="width:94%"></div></div>
+                        <span class="text-xs font-medium text-emerald-600 w-8">94%</span>
+                    </div>
+                </td>
+            </tr>
+            <tr class="hover:bg-slate-50/60">
+                <td class="table-td"><span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Bajo</span></td>
+                <td class="table-td text-gray-500">3 días / laboral</td>
+                <td class="table-td">18</td>
+                <td class="table-td">18</td>
+                <td class="table-td">
+                    <div class="flex items-center gap-2">
+                        <div class="flex-1 bg-gray-100 rounded-full h-1.5"><div class="bg-emerald-500 h-1.5 rounded-full" style="width:100%"></div></div>
+                        <span class="text-xs font-medium text-emerald-600 w-8">100%</span>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="modalNewSLA" class="hidden fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-md">
+        <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100">
+            <h3 class="text-base font-semibold">Nuevo SLA Plan</h3>
+            <button onclick="document.getElementById('modalNewSLA').classList.add('hidden')" class="text-gray-400 hover:text-gray-600 text-xl leading-none">&times;</button>
+        </div>
+        <div class="p-5 space-y-3">
+            <div>
+                <label class="form-label">Nombre <span class="text-red-500">*</span></label>
+                <input type="text" class="form-input" placeholder="ej. Urgente" />
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="form-label">Tiempo límite <span class="text-red-500">*</span></label>
+                    <input type="number" class="form-input" placeholder="4" min="1" />
+                </div>
+                <div>
+                    <label class="form-label">Unidad</label>
+                    <select class="form-select">
+                        <option>Horas</option>
+                        <option>Días</option>
+                        <option>Minutos</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <label class="form-label">Horario aplicado</label>
+                <select class="form-select">
+                    <option>Horario Laboral Chile</option>
+                    <option>24/7 Ininterrumpido</option>
+                </select>
+            </div>
+        </div>
+        <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-100">
+            <button onclick="document.getElementById('modalNewSLA').classList.add('hidden')" class="btn-secondary btn-sm">Cancelar</button>
+            <button class="btn-primary btn-sm">Guardar SLA</button>
+        </div>
+    </div>
+</div>

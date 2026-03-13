@@ -1,0 +1,243 @@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mis Tickets — SistemaTicket</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: { extend: { colors: { brand: { DEFAULT: '#6366f1', dark: '#4f46e5' } } } }
+        }
+    </script>
+</head>
+<body class="min-h-screen bg-purple-100 flex flex-col">
+
+    <!-- Topbar -->
+    <header class="bg-[#1e1b4b] text-white shadow">
+        <div class="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <span class="text-2xl">🎫</span>
+                <span class="font-bold text-lg tracking-tight">SistemaTicket</span>
+            </a>
+            <a href="/" class="text-sm text-indigo-200 hover:text-white transition-colors">← Volver al portal</a>
+        </div>
+    </header>
+
+    <!-- Franja de título -->
+    <div class="bg-[#1e1b4b]/90 text-white py-8 px-4">
+        <div class="max-w-5xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-indigo-500/40 flex items-center justify-center text-xl">📋</div>
+                <div>
+                    <h1 class="text-2xl font-bold">Mis tickets</h1>
+                    <p class="text-indigo-300 text-sm">Seguimiento de tus solicitudes de soporte</p>
+                </div>
+            </div>
+            <a href="/Portal/NewTicket" class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-400 text-white text-sm font-semibold transition-colors shadow">
+                + Abrir nuevo ticket
+            </a>
+        </div>
+    </div>
+
+    <main class="flex-1 max-w-5xl mx-auto w-full px-4 py-8 flex flex-col gap-5">
+
+        <!-- Buscar por número -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 px-6 py-4">
+            <div class="flex items-center gap-3 flex-wrap">
+                <span class="text-sm font-semibold text-gray-700 whitespace-nowrap">🔍 Buscar ticket por número:</span>
+                <input type="text" placeholder="Nº de ticket  ej. 100245"
+                    class="rounded-xl border border-gray-200 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 w-48" />
+                <input type="email" placeholder="Email con el que lo creaste"
+                    class="rounded-xl border border-gray-200 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 w-64" />
+                <button class="px-5 py-2 rounded-xl border border-indigo-300 text-indigo-600 text-sm font-semibold hover:bg-indigo-50 transition-colors">
+                    Consultar
+                </button>
+            </div>
+        </div>
+
+        <!-- Perfil + stats -->
+        <div class="flex items-center gap-5 flex-wrap">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-lg flex-shrink-0">PS</div>
+                <div>
+                    <div class="font-semibold text-gray-800">Pedro Soto</div>
+                    <div class="text-xs text-gray-400">pedro.soto@empresa.cl — cliente desde ene 2024</div>
+                </div>
+            </div>
+            <div class="flex gap-3 ml-auto flex-wrap">
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm px-5 py-3 text-center min-w-[80px]">
+                    <div class="text-2xl font-bold text-indigo-600">2</div>
+                    <div class="text-[11px] text-gray-400 mt-0.5">Abiertos</div>
+                </div>
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm px-5 py-3 text-center min-w-[80px]">
+                    <div class="text-2xl font-bold text-amber-500">1</div>
+                    <div class="text-[11px] text-gray-400 mt-0.5">Esperando</div>
+                </div>
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm px-5 py-3 text-center min-w-[80px]">
+                    <div class="text-2xl font-bold text-emerald-600">3</div>
+                    <div class="text-[11px] text-gray-400 mt-0.5">Cerrados</div>
+                </div>
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm px-5 py-3 text-center min-w-[80px]">
+                    <div class="text-2xl font-bold text-gray-500">6</div>
+                    <div class="text-[11px] text-gray-400 mt-0.5">Total</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="flex gap-2 flex-wrap">
+            <button class="px-4 py-1.5 rounded-full bg-indigo-600 text-white text-xs font-semibold shadow-sm">Todos</button>
+            <button class="px-4 py-1.5 rounded-full border border-gray-200 bg-white text-gray-600 text-xs font-semibold hover:border-indigo-300 hover:text-indigo-600 transition-colors">Abiertos</button>
+            <button class="px-4 py-1.5 rounded-full border border-gray-200 bg-white text-gray-600 text-xs font-semibold hover:border-indigo-300 hover:text-indigo-600 transition-colors">Esperando respuesta</button>
+            <button class="px-4 py-1.5 rounded-full border border-gray-200 bg-white text-gray-600 text-xs font-semibold hover:border-indigo-300 hover:text-indigo-600 transition-colors">Cerrados</button>
+        </div>
+
+        <!-- Lista de tickets -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="bg-gray-50 border-b border-gray-100 text-xs text-gray-400 uppercase tracking-wide">
+                        <th class="px-5 py-3 text-left font-semibold">Ticket #</th>
+                        <th class="px-4 py-3 text-left font-semibold">Asunto</th>
+                        <th class="px-4 py-3 text-left font-semibold">Departamento</th>
+                        <th class="px-4 py-3 text-left font-semibold">Estado</th>
+                        <th class="px-4 py-3 text-left font-semibold">Última actualización</th>
+                        <th class="px-4 py-3 text-left font-semibold">Creado</th>
+                        <th class="px-4 py-3"></th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-50">
+                    <!-- Ticket 1 - Abierto urgente -->
+                    <tr class="hover:bg-red-50/40 transition-colors">
+                        <td class="px-5 py-4">
+                            <a href="/Portal/TicketDetail/100248" class="font-bold text-indigo-600 hover:underline">#100248</a>
+                        </td>
+                        <td class="px-4 py-4">
+                            <div class="font-semibold text-gray-800">No puedo acceder al sistema desde ayer</div>
+                            <div class="text-xs text-gray-400">Acceso / Login</div>
+                        </td>
+                        <td class="px-4 py-4 text-gray-600">Soporte Técnico</td>
+                        <td class="px-4 py-4"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-red-100 text-red-700 text-xs font-semibold">🔴 Abierto</span></td>
+                        <td class="px-4 py-4">
+                            <div class="text-gray-700">hace 1 hora</div>
+                            <div class="text-xs text-gray-400">Agente respondió</div>
+                        </td>
+                        <td class="px-4 py-4 text-xs text-gray-400">15 ene 2025</td>
+                        <td class="px-4 py-4"><a href="/Portal/TicketDetail/100248" class="text-indigo-600 text-xs font-semibold hover:underline">Ver →</a></td>
+                    </tr>
+                    <!-- Ticket 2 - Esperando -->
+                    <tr class="hover:bg-amber-50/40 transition-colors">
+                        <td class="px-5 py-4">
+                            <a href="/Portal/TicketDetail/100245" class="font-bold text-indigo-600 hover:underline">#100245</a>
+                        </td>
+                        <td class="px-4 py-4">
+                            <div class="font-semibold text-gray-800">Solicitud de nueva laptop para trabajo remoto</div>
+                            <div class="text-xs text-gray-400">Solicitud de nuevo equipo</div>
+                        </td>
+                        <td class="px-4 py-4 text-gray-600">Hardware</td>
+                        <td class="px-4 py-4"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-amber-100 text-amber-700 text-xs font-semibold">🟡 Esperando cliente</span></td>
+                        <td class="px-4 py-4">
+                            <div class="text-gray-700">hace 3 días</div>
+                            <div class="text-xs text-gray-400">Agente necesita info</div>
+                        </td>
+                        <td class="px-4 py-4 text-xs text-gray-400">10 ene 2025</td>
+                        <td class="px-4 py-4"><a href="/Portal/TicketDetail/100245" class="text-indigo-600 text-xs font-semibold hover:underline">Ver →</a></td>
+                    </tr>
+                    <!-- Ticket 3 - En proceso -->
+                    <tr class="hover:bg-sky-50/40 transition-colors">
+                        <td class="px-5 py-4">
+                            <a href="/Portal/TicketDetail/100243" class="font-bold text-indigo-600 hover:underline">#100243</a>
+                        </td>
+                        <td class="px-4 py-4">
+                            <div class="font-semibold text-gray-800">Error al generar reporte mensual PDF</div>
+                            <div class="text-xs text-gray-400">Reportes y exportación</div>
+                        </td>
+                        <td class="px-4 py-4 text-gray-600">Soporte Técnico</td>
+                        <td class="px-4 py-4"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold">🔵 En proceso</span></td>
+                        <td class="px-4 py-4">
+                            <div class="text-gray-700">hace 1 día</div>
+                            <div class="text-xs text-gray-400">Asignado a Valentina R.</div>
+                        </td>
+                        <td class="px-4 py-4 text-xs text-gray-400">8 ene 2025</td>
+                        <td class="px-4 py-4"><a href="/Portal/TicketDetail/100243" class="text-indigo-600 text-xs font-semibold hover:underline">Ver →</a></td>
+                    </tr>
+                    <!-- Ticket 4 - Cerrado -->
+                    <tr class="hover:bg-gray-50 transition-colors opacity-60">
+                        <td class="px-5 py-4">
+                            <a href="/Portal/TicketDetail/100240" class="font-bold text-gray-500 hover:underline">#100240</a>
+                        </td>
+                        <td class="px-4 py-4">
+                            <div class="font-semibold text-gray-500">Problemas con VPN desde casa</div>
+                            <div class="text-xs text-gray-400">Conectividad / Red / VPN</div>
+                        </td>
+                        <td class="px-4 py-4 text-gray-400">Soporte Técnico</td>
+                        <td class="px-4 py-4"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gray-100 text-gray-500 text-xs font-semibold">⚫ Cerrado</span></td>
+                        <td class="px-4 py-4">
+                            <div class="text-gray-500">hace 5 días</div>
+                            <div class="text-xs text-gray-400">Resuelto por Diego C.</div>
+                        </td>
+                        <td class="px-4 py-4 text-xs text-gray-400">2 ene 2025</td>
+                        <td class="px-4 py-4"><a href="/Portal/TicketDetail/100240" class="text-gray-400 text-xs font-semibold hover:underline">Ver →</a></td>
+                    </tr>
+                    <!-- Ticket 5 - Cerrado -->
+                    <tr class="hover:bg-gray-50 transition-colors opacity-60">
+                        <td class="px-5 py-4">
+                            <a href="/Portal/TicketDetail/100231" class="font-bold text-gray-500 hover:underline">#100231</a>
+                        </td>
+                        <td class="px-4 py-4">
+                            <div class="font-semibold text-gray-500">Consulta factura diciembre 2024</div>
+                            <div class="text-xs text-gray-400">Consulta de factura</div>
+                        </td>
+                        <td class="px-4 py-4 text-gray-400">Facturación</td>
+                        <td class="px-4 py-4"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gray-100 text-gray-500 text-xs font-semibold">⚫ Cerrado</span></td>
+                        <td class="px-4 py-4">
+                            <div class="text-gray-500">hace 15 días</div>
+                            <div class="text-xs text-gray-400">Resuelto por Sofía M.</div>
+                        </td>
+                        <td class="px-4 py-4 text-xs text-gray-400">25 dic 2024</td>
+                        <td class="px-4 py-4"><a href="/Portal/TicketDetail/100231" class="text-gray-400 text-xs font-semibold hover:underline">Ver →</a></td>
+                    </tr>
+                    <!-- Ticket 6 - Cerrado -->
+                    <tr class="hover:bg-gray-50 transition-colors opacity-60">
+                        <td class="px-5 py-4">
+                            <span class="font-bold text-gray-400">#100220</span>
+                        </td>
+                        <td class="px-4 py-4">
+                            <div class="font-semibold text-gray-500">Instalación Microsoft Office</div>
+                            <div class="text-xs text-gray-400">Instalación de software</div>
+                        </td>
+                        <td class="px-4 py-4 text-gray-400">Soporte Técnico</td>
+                        <td class="px-4 py-4"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gray-100 text-gray-500 text-xs font-semibold">⚫ Cerrado</span></td>
+                        <td class="px-4 py-4">
+                            <div class="text-gray-500">hace 30 días</div>
+                            <div class="text-xs text-gray-400">Resuelto por Matías F.</div>
+                        </td>
+                        <td class="px-4 py-4 text-xs text-gray-400">10 dic 2024</td>
+                        <td class="px-4 py-4"><span class="text-gray-300 text-xs font-semibold">Ver →</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Calificación -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 px-6 py-4 flex items-center justify-between gap-4 flex-wrap">
+            <p class="text-sm text-gray-600">El ticket <span class="font-semibold text-gray-800">#100240</span> fue cerrado recientemente. ¿Quedaste satisfecho?</p>
+            <div class="flex gap-2">
+                <button class="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-emerald-200 text-emerald-700 text-sm font-semibold hover:bg-emerald-50 transition-colors">👍 Sí, problema resuelto</button>
+                <button class="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-red-200 text-red-600 text-sm font-semibold hover:bg-red-50 transition-colors">👎 El problema persiste</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#1e1b4b] text-indigo-300 text-xs text-center py-4">
+        © 2026 SistemaTicket — Todos los derechos reservados
+    </footer>
+
+</body>
+</html>

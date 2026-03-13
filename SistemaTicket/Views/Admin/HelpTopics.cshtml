@@ -1,0 +1,224 @@
+@{
+    ViewData["Title"] = "Temas de Ayuda";
+    ViewData["Breadcrumb"] = "6.3 Temas de Ayuda";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="flex items-center justify-between mb-6">
+    <div>
+        <h1 class="text-xl font-bold text-gray-900">🏷️ Temas de Ayuda</h1>
+        <p class="text-sm text-gray-500 mt-0.5">Admin Panel › Manage › Help Topics</p>
+    </div>
+    <button onclick="document.getElementById('modalNewTopic').classList.remove('hidden')" class="btn-primary btn-sm">+ Nuevo Tema</button>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-4">
+    <!-- Tree sidebar -->
+    <div class="lg:col-span-2 card p-4">
+        <h2 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Jerarquía de temas</h2>
+        <ul class="space-y-1 text-sm">
+            <li>
+                <div class="flex items-center justify-between px-2 py-1.5 rounded-lg hover:bg-slate-50">
+                    <span class="font-semibold text-gray-700">💻 Soporte Técnico</span>
+                </div>
+                <ul class="ml-4 mt-1 space-y-1">
+                    <li>
+                        <div class="flex items-center justify-between px-2 py-1 rounded-lg hover:bg-slate-50">
+                            <span class="text-gray-600">📁 Software</span>
+                        </div>
+                        <ul class="ml-4 space-y-0.5">
+                            <li class="flex items-center justify-between px-2 py-1 rounded-lg hover:bg-slate-50 text-gray-500">
+                                <span>Reportes y errores</span>
+                                <span class="inline-flex px-1.5 py-0.5 rounded-full text-xs bg-slate-100 text-slate-500">5</span>
+                            </li>
+                            <li class="flex items-center justify-between px-2 py-1 rounded-lg hover:bg-slate-50 text-gray-500">
+                                <span>Problemas de acceso</span>
+                                <span class="inline-flex px-1.5 py-0.5 rounded-full text-xs bg-slate-100 text-slate-500">8</span>
+                            </li>
+                            <li class="flex items-center justify-between px-2 py-1 rounded-lg hover:bg-slate-50 text-gray-500">
+                                <span>Instalación software</span>
+                                <span class="inline-flex px-1.5 py-0.5 rounded-full text-xs bg-slate-100 text-slate-500">2</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="flex items-center justify-between px-2 py-1 rounded-lg hover:bg-slate-50">
+                            <span class="text-gray-600">🔧 Hardware</span>
+                        </div>
+                        <ul class="ml-4 space-y-0.5">
+                            <li class="flex items-center justify-between px-2 py-1 rounded-lg hover:bg-slate-50 text-gray-500">
+                                <span>Falla de equipo</span>
+                                <span class="inline-flex px-1.5 py-0.5 rounded-full text-xs bg-slate-100 text-slate-500">7</span>
+                            </li>
+                            <li class="flex items-center justify-between px-2 py-1 rounded-lg hover:bg-slate-50 text-gray-500">
+                                <span>Solicitud equipamiento</span>
+                                <span class="inline-flex px-1.5 py-0.5 rounded-full text-xs bg-slate-100 text-slate-500">3</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="flex items-center justify-between px-2 py-1 rounded-lg hover:bg-slate-50 text-gray-500">
+                        <span>🌐 Conectividad / Red</span>
+                        <span class="inline-flex px-1.5 py-0.5 rounded-full text-xs bg-slate-100 text-slate-500">4</span>
+                    </li>
+                </ul>
+            </li>
+            <li class="mt-2">
+                <div class="flex items-center px-2 py-1.5 rounded-lg hover:bg-slate-50">
+                    <span class="font-semibold text-gray-700">💳 Facturación</span>
+                </div>
+                <ul class="ml-4 space-y-0.5">
+                    <li class="flex items-center justify-between px-2 py-1 rounded-lg hover:bg-slate-50 text-gray-500">
+                        <span>Consulta de factura</span>
+                        <span class="inline-flex px-1.5 py-0.5 rounded-full text-xs bg-slate-100 text-slate-500">6</span>
+                    </li>
+                    <li class="flex items-center justify-between px-2 py-1 rounded-lg hover:bg-slate-50 text-gray-500">
+                        <span>Corrección de cobro</span>
+                        <span class="inline-flex px-1.5 py-0.5 rounded-full text-xs bg-slate-100 text-slate-500">1</span>
+                    </li>
+                </ul>
+            </li>
+            <li class="mt-2">
+                <div class="flex items-center px-2 py-1.5 rounded-lg hover:bg-slate-50">
+                    <span class="font-semibold text-gray-700">👤 RRHH</span>
+                </div>
+                <ul class="ml-4 space-y-0.5">
+                    <li class="flex items-center justify-between px-2 py-1 rounded-lg hover:bg-slate-50 text-gray-500">
+                        <span>Solicitud de personal</span>
+                        <span class="inline-flex px-1.5 py-0.5 rounded-full text-xs bg-slate-100 text-slate-500">2</span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Table -->
+    <div class="lg:col-span-3 card overflow-hidden">
+        <table class="w-full text-sm">
+            <thead>
+                <tr class="bg-slate-50 border-b border-gray-100">
+                    <th class="table-th">Tema</th>
+                    <th class="table-th">Depto</th>
+                    <th class="table-th">SLA</th>
+                    <th class="table-th">Prioridad</th>
+                    <th class="table-th">Tipo</th>
+                    <th class="table-th">Estado</th>
+                    <th class="table-th"></th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-50">
+                <tr class="hover:bg-slate-50/60">
+                    <td class="table-td"><div class="font-medium text-gray-800">Reportes y errores</div><div class="text-xs text-gray-400">Soporte Técnico › Software</div></td>
+                    <td class="table-td text-gray-500 text-xs">Soporte Técnico</td>
+                    <td class="table-td text-gray-500 text-xs">Normal</td>
+                    <td class="table-td"><span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-sky-100 text-sky-700">Normal</span></td>
+                    <td class="table-td"><span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-sky-100 text-sky-700">Público</span></td>
+                    <td class="table-td"><span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700">Activo</span></td>
+                    <td class="table-td"><button class="text-gray-400 hover:text-indigo-600 transition-colors">✏️</button></td>
+                </tr>
+                <tr class="hover:bg-slate-50/60">
+                    <td class="table-td"><div class="font-medium text-gray-800">Falla de equipo</div><div class="text-xs text-gray-400">Soporte Técnico › Hardware</div></td>
+                    <td class="table-td text-gray-500 text-xs">Hardware</td>
+                    <td class="table-td text-gray-500 text-xs">Alto</td>
+                    <td class="table-td"><span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-700">Alta</span></td>
+                    <td class="table-td"><span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-sky-100 text-sky-700">Público</span></td>
+                    <td class="table-td"><span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700">Activo</span></td>
+                    <td class="table-td"><button class="text-gray-400 hover:text-indigo-600 transition-colors">✏️</button></td>
+                </tr>
+                <tr class="hover:bg-slate-50/60">
+                    <td class="table-td"><div class="font-medium text-gray-800">Conectividad / Red</div><div class="text-xs text-gray-400">Soporte Técnico</div></td>
+                    <td class="table-td text-gray-500 text-xs">Soporte Técnico</td>
+                    <td class="table-td text-gray-500 text-xs">Crítico</td>
+                    <td class="table-td"><span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700">Urgente</span></td>
+                    <td class="table-td"><span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-sky-100 text-sky-700">Público</span></td>
+                    <td class="table-td"><span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700">Activo</span></td>
+                    <td class="table-td"><button class="text-gray-400 hover:text-indigo-600 transition-colors">✏️</button></td>
+                </tr>
+                <tr class="hover:bg-slate-50/60">
+                    <td class="table-td"><div class="font-medium text-gray-800">Consulta de factura</div><div class="text-xs text-gray-400">Facturación</div></td>
+                    <td class="table-td text-gray-500 text-xs">Facturación</td>
+                    <td class="table-td text-gray-500 text-xs">Alto</td>
+                    <td class="table-td"><span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-sky-100 text-sky-700">Normal</span></td>
+                    <td class="table-td"><span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-sky-100 text-sky-700">Público</span></td>
+                    <td class="table-td"><span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700">Activo</span></td>
+                    <td class="table-td"><button class="text-gray-400 hover:text-indigo-600 transition-colors">✏️</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="modalNewTopic" class="hidden fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-xl">
+        <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100">
+            <h3 class="text-base font-semibold">Nuevo Tema de Ayuda</h3>
+            <button onclick="document.getElementById('modalNewTopic').classList.add('hidden')" class="text-gray-400 hover:text-gray-600 text-xl leading-none">&times;</button>
+        </div>
+        <div class="p-5 space-y-3">
+            <div class="grid grid-cols-3 gap-3">
+                <div class="col-span-2">
+                    <label class="form-label">Nombre del tema <span class="text-red-500">*</span></label>
+                    <input type="text" class="form-input" placeholder="ej. Falla técnica en software" />
+                </div>
+                <div>
+                    <label class="form-label">Tipo</label>
+                    <select class="form-select">
+                        <option>Público</option>
+                        <option>Privado</option>
+                    </select>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="form-label">Tema padre (opcional)</label>
+                    <select class="form-select">
+                        <option>— Sin padre (nivel raíz) —</option>
+                        <option>Soporte Técnico</option>
+                        <option>Soporte Técnico › Software</option>
+                        <option>Soporte Técnico › Hardware</option>
+                        <option>Facturación</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="form-label">Departamento</label>
+                    <select class="form-select">
+                        <option>Soporte Técnico</option>
+                        <option>Hardware</option>
+                        <option>Facturación</option>
+                        <option>RRHH</option>
+                    </select>
+                </div>
+            </div>
+            <div class="grid grid-cols-3 gap-3">
+                <div>
+                    <label class="form-label">Prioridad</label>
+                    <select class="form-select">
+                        <option>Baja</option>
+                        <option selected>Normal</option>
+                        <option>Alta</option>
+                        <option>Urgente</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="form-label">SLA</label>
+                    <select class="form-select">
+                        <option>Normal (8h laboral)</option>
+                        <option>Alto (4h laboral)</option>
+                        <option>Crítico (1h 24/7)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="form-label">Auto-asignación</label>
+                    <select class="form-select">
+                        <option>— Sin asignación —</option>
+                        <option>Valentina Ruiz</option>
+                        <option>Equipo VIP</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-100">
+            <button onclick="document.getElementById('modalNewTopic').classList.add('hidden')" class="btn-secondary btn-sm">Cancelar</button>
+            <button class="btn-primary btn-sm">Guardar Tema</button>
+        </div>
+    </div>
+</div>

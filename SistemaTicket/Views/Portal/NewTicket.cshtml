@@ -1,0 +1,203 @@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abrir Ticket — SistemaTicket</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: { extend: { colors: { brand: { DEFAULT: '#6366f1', dark: '#4f46e5' } } } }
+        }
+    </script>
+</head>
+<body class="min-h-screen bg-purple-100 flex flex-col">
+
+    <!-- Topbar -->
+    <header class="bg-[#1e1b4b] text-white shadow">
+        <div class="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <span class="text-2xl">🎫</span>
+                <span class="font-bold text-lg tracking-tight">SistemaTicket</span>
+            </a>
+            <a href="/" class="text-sm text-indigo-200 hover:text-white transition-colors">← Volver al portal</a>
+        </div>
+    </header>
+
+    <!-- Franja superior con título -->
+    <div class="bg-[#1e1b4b]/90 text-white py-8 px-4">
+        <div class="max-w-3xl mx-auto">
+            <div class="flex items-center gap-3 mb-1">
+                <div class="w-10 h-10 rounded-xl bg-indigo-500/40 flex items-center justify-center text-xl">🎫</div>
+                <h1 class="text-2xl font-bold">Abrir nuevo ticket</h1>
+            </div>
+            <p class="text-indigo-300 text-sm ml-13 pl-1">Completa el formulario y recibirás un email de confirmación con tu número de seguimiento.</p>
+        </div>
+    </div>
+
+    <main class="flex-1 max-w-3xl mx-auto w-full px-4 py-8 flex flex-col gap-5">
+
+        <!-- Aviso informativo -->
+        <div class="flex items-start gap-3 bg-indigo-50 border border-indigo-200 rounded-xl px-4 py-3 text-sm text-indigo-800">
+            <span class="text-lg flex-shrink-0 mt-0.5">📌</span>
+            <span>Cuando envíes este formulario recibirás un email de confirmación con el número de seguimiento de tu solicitud.</span>
+        </div>
+
+        <form class="flex flex-col gap-5">
+
+            <!-- Sección: Datos de contacto -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-100 flex items-center gap-2">
+                    <span class="text-base">👤</span>
+                    <span class="font-semibold text-gray-800 text-sm">Tus datos de contacto</span>
+                </div>
+                <div class="px-6 py-5 grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1.5">Nombre completo <span class="text-red-500">*</span></label>
+                        <input type="text" placeholder="ej. Juan Pérez"
+                            class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-shadow" />
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1.5">Email <span class="text-red-500">*</span></label>
+                        <input type="email" placeholder="tu@email.com"
+                            class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-shadow" />
+                        <p class="text-[11px] text-gray-400 mt-1">Recibirás notificaciones en este email</p>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1.5">Teléfono</label>
+                        <input type="tel" placeholder="+56 9 XXXX XXXX"
+                            class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-shadow" />
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1.5">Contraseña <span class="text-red-500">*</span></label>
+                        <input type="password" placeholder="Para acceder a tu cuenta"
+                            class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-shadow" />
+                        <p class="text-[11px] text-gray-400 mt-1">Para dar seguimiento a tus tickets</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Detalles de la solicitud -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-100 flex items-center gap-2">
+                    <span class="text-base">📋</span>
+                    <span class="font-semibold text-gray-800 text-sm">Detalles de tu solicitud</span>
+                </div>
+                <div class="px-6 py-5 flex flex-col gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1.5">Tipo de solicitud <span class="text-red-500">*</span></label>
+                        <select class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white">
+                            <option value="">— Selecciona el tipo de problema —</option>
+                            <optgroup label="💻 Soporte Técnico — Software">
+                                <option>Acceso / Login</option>
+                                <option>Reportes y exportación</option>
+                                <option>Instalación de software</option>
+                            </optgroup>
+                            <optgroup label="🖥️ Soporte Técnico — Hardware">
+                                <option>Falla de equipo</option>
+                                <option>Solicitud de nuevo equipo</option>
+                            </optgroup>
+                            <optgroup label="🌐 Conectividad">
+                                <option>Conectividad / Red / VPN</option>
+                            </optgroup>
+                            <optgroup label="🧾 Facturación">
+                                <option>Consulta de factura</option>
+                                <option>Corrección de datos</option>
+                            </optgroup>
+                            <optgroup label="👥 Recursos Humanos">
+                                <option>Solicitud de personal</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1.5">Resumen del problema <span class="text-red-500">*</span></label>
+                        <input type="text" placeholder="Describe brevemente el problema (máx. 120 caracteres)" maxlength="120"
+                            class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-shadow" />
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1.5">Descripción detallada <span class="text-red-500">*</span></label>
+                        <textarea rows="5" placeholder="Describe el problema con el mayor detalle posible:&#10;• ¿Qué estabas haciendo cuando ocurrió?&#10;• ¿Qué mensaje de error aparece?&#10;• ¿Cuándo comenzó el problema?&#10;• ¿Afecta a otros usuarios?"
+                            class="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-shadow resize-none"></textarea>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1.5">Sistema operativo</label>
+                            <select class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white">
+                                <option>— No aplica —</option>
+                                <option>Windows 11</option>
+                                <option>Windows 10</option>
+                                <option>macOS Sequoia</option>
+                                <option>Ubuntu / Linux</option>
+                                <option>Android</option>
+                                <option>iOS</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1.5">Urgencia declarada</label>
+                            <select class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white">
+                                <option>Normal — Puedo esperar</option>
+                                <option>Alta — Afecta mi trabajo</option>
+                                <option>Crítica — Sistema completamente caído</option>
+                            </select>
+                            <p class="text-[11px] text-gray-400 mt-1">La prioridad final la determina soporte</p>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1.5">Archivos adjuntos</label>
+                        <label class="flex items-center gap-3 w-full rounded-xl border-2 border-dashed border-gray-200 px-4 py-4 cursor-pointer hover:border-indigo-300 hover:bg-indigo-50/30 transition-colors">
+                            <span class="text-2xl">📎</span>
+                            <div>
+                                <div class="text-sm font-medium text-gray-700">Haz clic para adjuntar archivos</div>
+                                <div class="text-[11px] text-gray-400">Capturas, logs o documentos. Máx. 20 MB por archivo.</div>
+                            </div>
+                            <input type="file" multiple class="hidden" />
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acciones -->
+            <div class="flex items-center justify-between">
+                <p class="text-xs text-gray-400">Los campos con <span class="text-red-500 font-bold">*</span> son obligatorios</p>
+                <button type="submit"
+                    class="flex items-center gap-2 px-8 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm transition-colors shadow-md shadow-indigo-200">
+                    <span>📨</span> Crear ticket
+                </button>
+            </div>
+        </form>
+
+        <!-- Qué esperar -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 px-6 py-5">
+            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">¿Qué ocurre después?</p>
+            <div class="flex flex-col gap-3">
+                <div class="flex items-start gap-3">
+                    <div class="w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">1</div>
+                    <p class="text-sm text-gray-600">Recibirás un email de confirmación con el número de tu ticket <span class="font-mono text-gray-800">(#XXXXXX)</span></p>
+                </div>
+                <div class="flex items-start gap-3">
+                    <div class="w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">2</div>
+                    <p class="text-sm text-gray-600">Un agente revisará tu solicitud y la asignará al equipo correspondiente</p>
+                </div>
+                <div class="flex items-start gap-3">
+                    <div class="w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">3</div>
+                    <p class="text-sm text-gray-600">Recibirás notificaciones por email con cada actualización de tu ticket</p>
+                </div>
+                <div class="flex items-start gap-3">
+                    <div class="w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">4</div>
+                    <p class="text-sm text-gray-600">Puedes consultar el estado en <a href="/Portal/MyTickets" class="text-indigo-600 hover:underline font-medium">Mis tickets</a></p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#1e1b4b] text-indigo-300 text-xs text-center py-4">
+        © 2026 SistemaTicket — Todos los derechos reservados
+    </footer>
+
+</body>
+</html>

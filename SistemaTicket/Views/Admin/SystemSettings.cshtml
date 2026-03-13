@@ -1,0 +1,177 @@
+@{
+    ViewData["Title"] = "Configuración";
+    ViewData["Breadcrumb"] = "6.1 Configuración del Sistema";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="flex items-center justify-between mb-6">
+    <div>
+        <h1 class="text-xl font-bold text-gray-900">⚙️ Configuración del Sistema</h1>
+        <p class="text-sm text-gray-500 mt-0.5">Admin Panel › Admin › Settings</p>
+    </div>
+    <button class="btn-primary btn-sm">💾 Guardar cambios</button>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+    <!-- Main settings -->
+    <div class="lg:col-span-2 space-y-4">
+
+        <!-- General -->
+        <div class="card p-5">
+            <h2 class="text-sm font-semibold text-gray-700 mb-4 pb-2 border-b border-gray-100">🌐 General</h2>
+            <div class="space-y-3">
+                <div>
+                    <label class="form-label">Nombre del Helpdesk</label>
+                    <input type="text" class="form-input" value="SistemaTicket" />
+                </div>
+                <div>
+                    <label class="form-label">URL del sistema</label>
+                    <input type="url" class="form-input" value="https://soporte.empresa.cl" />
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="form-label">Departamento por defecto</label>
+                        <select class="form-select">
+                            <option selected>Soporte Técnico</option>
+                            <option>Hardware</option>
+                            <option>Facturación</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label">Horario por defecto</label>
+                        <select class="form-select">
+                            <option selected>Horario Laboral Chile</option>
+                            <option>24/7 Ininterrumpido</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="form-label">Estado por defecto</label>
+                        <select class="form-select">
+                            <option selected>Abierto</option>
+                            <option>En proceso</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label">Bloqueo de ticket</label>
+                        <select class="form-select">
+                            <option>Sin bloqueo</option>
+                            <option selected>30 minutos</option>
+                            <option>1 hora</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Usuarios y Acceso -->
+        <div class="card p-5">
+            <h2 class="text-sm font-semibold text-gray-700 mb-4 pb-2 border-b border-gray-100">👥 Usuarios y Acceso</h2>
+            <div class="space-y-3">
+                <div>
+                    <label class="form-label">Máximo tickets abiertos por usuario</label>
+                    <input type="number" class="form-input" value="5" min="1" max="50" />
+                </div>
+                <div class="flex items-center justify-between bg-slate-50 rounded-lg px-3 py-2">
+                    <div>
+                        <div class="text-sm font-medium text-gray-700">Requerir registro para abrir tickets</div>
+                        <div class="text-xs text-gray-400">Los usuarios deben crear una cuenta antes de enviar tickets</div>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer ml-4 flex-shrink-0">
+                        <input type="checkbox" class="sr-only peer" checked />
+                        <div class="w-9 h-5 bg-gray-200 rounded-full peer peer-checked:bg-indigo-500 after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:after:translate-x-4"></div>
+                    </label>
+                </div>
+                <div class="flex items-center justify-between bg-slate-50 rounded-lg px-3 py-2">
+                    <div>
+                        <div class="text-sm font-medium text-gray-700">Habilitar editor de texto enriquecido</div>
+                        <div class="text-xs text-gray-400">Permite formateo HTML en respuestas y notas</div>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer ml-4 flex-shrink-0">
+                        <input type="checkbox" class="sr-only peer" checked />
+                        <div class="w-9 h-5 bg-gray-200 rounded-full peer peer-checked:bg-indigo-500 after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:after:translate-x-4"></div>
+                    </label>
+                </div>
+                <div class="flex items-center justify-between bg-slate-50 rounded-lg px-3 py-2">
+                    <div>
+                        <div class="text-sm font-medium text-gray-700">Auto-crear cuenta al primer ticket</div>
+                        <div class="text-xs text-gray-400">Si se desactiva el registro, se crea cuenta automáticamente</div>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer ml-4 flex-shrink-0">
+                        <input type="checkbox" class="sr-only peer" />
+                        <div class="w-9 h-5 bg-gray-200 rounded-full peer peer-checked:bg-indigo-500 after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:after:translate-x-4"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Almacenamiento -->
+        <div class="card p-5">
+            <h2 class="text-sm font-semibold text-gray-700 mb-4 pb-2 border-b border-gray-100">📦 Almacenamiento</h2>
+            <div class="space-y-3">
+                <div>
+                    <label class="form-label">Backend de almacenamiento</label>
+                    <select class="form-select">
+                        <option selected>Filesystem (local)</option>
+                        <option>Amazon S3</option>
+                        <option>Azure Blob Storage</option>
+                    </select>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="form-label">Tamaño máximo de adjunto</label>
+                        <div class="flex items-center gap-2">
+                            <input type="number" class="form-input" value="10" min="1" max="100" />
+                            <span class="text-sm text-gray-500 whitespace-nowrap">MB</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="form-label">Tipos de archivo permitidos</label>
+                        <input type="text" class="form-input" value=".pdf,.docx,.xlsx,.png,.jpg,.zip" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="space-y-4">
+        <!-- System Info -->
+        <div class="card p-5">
+            <h2 class="text-sm font-semibold text-gray-700 mb-3">🖥️ Información del Sistema</h2>
+            <dl class="space-y-2 text-sm">
+                <div class="flex justify-between">
+                    <dt class="text-gray-500">Versión</dt>
+                    <dd class="font-medium text-gray-700">v1.18.1</dd>
+                </div>
+                <div class="flex justify-between">
+                    <dt class="text-gray-500">Runtime</dt>
+                    <dd class="font-medium text-gray-700">.NET 10</dd>
+                </div>
+                <div class="flex justify-between">
+                    <dt class="text-gray-500">Base de datos</dt>
+                    <dd class="font-medium text-gray-700">MySQL 8.0</dd>
+                </div>
+                <div class="flex justify-between">
+                    <dt class="text-gray-500">Zona horaria</dt>
+                    <dd class="font-medium text-gray-700">America/Santiago</dd>
+                </div>
+                <div class="flex justify-between">
+                    <dt class="text-gray-500">Caché</dt>
+                    <dd class="font-medium text-gray-700">Memory</dd>
+                </div>
+            </dl>
+        </div>
+        <!-- Warning -->
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4">
+            <div class="flex items-start gap-2">
+                <span class="text-amber-500 mt-0.5">⚠️</span>
+                <div>
+                    <div class="text-sm font-semibold text-amber-800 mb-1">Modo Desarrollo</div>
+                    <p class="text-xs text-amber-700">Esta instancia está en modo desarrollo. No usar en producción con datos reales.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

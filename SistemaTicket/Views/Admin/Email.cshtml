@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Correo Electrónico";
+    ViewData["Breadcrumb"] = "Correo Electrónico";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="flex items-center justify-between mb-6">
+    <div><h1 class="text-xl font-bold text-gray-900">📧 Correo Electrónico</h1><p class="text-sm text-gray-500 mt-0.5">Cuentas de correo y configuración SMTP — Sección 6.2</p></div>
+    <button onclick="document.getElementById('newEmailModal').classList.remove('hidden')" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition-colors">➕ Nueva cuenta</button>
+</div>
+<div class="border-b border-gray-200 mb-5">
+    <nav class="-mb-px flex gap-1">
+        <button onclick="showEmailTab('accounts')" id="etab-accounts" class="px-4 py-2 text-sm font-medium border-b-2 border-indigo-600 text-indigo-600">Cuentas de correo</button>
+        <button onclick="showEmailTab('smtp')" id="etab-smtp" class="px-4 py-2 text-sm font-medium border-b-2 border-transparent text-gray-500 hover:text-gray-700">Configuración SMTP</button>
+        <button onclick="showEmailTab('esettings')" id="etab-esettings" class="px-4 py-2 text-sm font-medium border-b-2 border-transparent text-gray-500 hover:text-gray-700">Ajustes generales</button>
+    </nav>
+</div>
+<div id="epanel-accounts">
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <table class="w-full text-sm">
+            <thead><tr class="bg-slate-50 border-b border-gray-100"><th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Nombre</th><th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Dirección</th><th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Protocolo</th><th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Estado</th><th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Acciones</th></tr></thead>
+            <tbody class="divide-y divide-gray-50">
+                <tr class="hover:bg-slate-50/60"><td class="px-4 py-3 font-medium text-gray-800">Soporte Principal</td><td class="px-4 py-3 text-gray-500 font-mono text-xs">soporte@empresa.cl</td><td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-sky-100 text-sky-700">IMAP</span></td><td class="px-4 py-3"><span class="inline-flex items-center gap-1 text-xs text-emerald-600 font-medium">● Activo</span></td><td class="px-4 py-3 flex gap-3"><button class="text-xs text-indigo-600 hover:underline">Editar</button><button class="text-xs text-red-500 hover:underline">Eliminar</button></td></tr>
+                <tr class="hover:bg-slate-50/60"><td class="px-4 py-3 font-medium text-gray-800">Facturación</td><td class="px-4 py-3 text-gray-500 font-mono text-xs">facturas@empresa.cl</td><td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-700">POP3</span></td><td class="px-4 py-3"><span class="inline-flex items-center gap-1 text-xs text-emerald-600 font-medium">● Activo</span></td><td class="px-4 py-3 flex gap-3"><button class="text-xs text-indigo-600 hover:underline">Editar</button><button class="text-xs text-red-500 hover:underline">Eliminar</button></td></tr>
+                <tr class="hover:bg-slate-50/60"><td class="px-4 py-3 font-medium text-gray-800">RRHH</td><td class="px-4 py-3 text-gray-500 font-mono text-xs">rrhh@empresa.cl</td><td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-sky-100 text-sky-700">IMAP</span></td><td class="px-4 py-3"><span class="inline-flex items-center gap-1 text-xs text-amber-600 font-medium">⚠ Error de conexión</span></td><td class="px-4 py-3 flex gap-3"><button class="text-xs text-indigo-600 hover:underline">Editar</button><button class="text-xs text-red-500 hover:underline">Eliminar</button></td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div id="epanel-smtp" class="hidden">
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 max-w-xl">
+        <h2 class="text-sm font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-100">Servidor SMTP de salida</h2>
+        <div class="grid grid-cols-2 gap-4">
+            <div class="col-span-2"><label class="block text-xs font-semibold text-gray-600 mb-1">Servidor SMTP</label><input type="text" class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" value="smtp.empresa.cl" /></div>
+            <div><label class="block text-xs font-semibold text-gray-600 mb-1">Puerto</label><input type="number" class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm" value="587" /></div>
+            <div><label class="block text-xs font-semibold text-gray-600 mb-1">Cifrado</label><select class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm bg-white"><option>TLS</option><option>SSL</option></select></div>
+            <div><label class="block text-xs font-semibold text-gray-600 mb-1">Usuario</label><input type="email" class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm" value="noreply@empresa.cl" /></div>
+            <div><label class="block text-xs font-semibold text-gray-600 mb-1">Contraseña</label><input type="password" class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm" value="••••••••" /></div>
+        </div>
+        <button class="mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700">💾 Guardar SMTP</button>
+    </div>
+</div>
+<div id="epanel-esettings" class="hidden">
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 max-w-xl space-y-4">
+        <div class="flex items-center justify-between py-2 border-b border-gray-50"><div><p class="text-sm font-medium text-gray-700">Notificar al cliente al crear ticket</p></div><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" class="sr-only peer" checked><div class="w-10 h-5 bg-gray-200 rounded-full peer peer-checked:bg-indigo-600 after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:after:translate-x-5"></div></label></div>
+        <div class="flex items-center justify-between py-2"><div><p class="text-sm font-medium text-gray-700">Alerta de SLA vencido al supervisor</p></div><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" class="sr-only peer"><div class="w-10 h-5 bg-gray-200 rounded-full peer peer-checked:bg-indigo-600 after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:after:translate-x-5"></div></label></div>
+    </div>
+</div>
+<div id="newEmailModal" class="hidden fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-md">
+        <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100"><h3 class="text-base font-semibold text-gray-900">➕ Nueva cuenta de correo</h3><button onclick="document.getElementById('newEmailModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-600 text-xl">&times;</button></div>
+        <div class="p-5 space-y-3">
+            <div><label class="block text-xs font-semibold text-gray-600 mb-1">Nombre</label><input type="text" class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" placeholder="ej. Soporte General" /></div>
+            <div><label class="block text-xs font-semibold text-gray-600 mb-1">Dirección de correo</label><input type="email" class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" placeholder="soporte@empresa.cl" /></div>
+            <div class="grid grid-cols-2 gap-3"><div><label class="block text-xs font-semibold text-gray-600 mb-1">Protocolo</label><select class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm bg-white"><option>IMAP</option><option>POP3</option></select></div><div><label class="block text-xs font-semibold text-gray-600 mb-1">Puerto</label><input type="number" class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm" placeholder="993" /></div></div>
+        </div>
+        <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-100"><button onclick="document.getElementById('newEmailModal').classList.add('hidden')" class="px-4 py-2 rounded-lg border border-gray-200 text-sm text-gray-600 hover:bg-gray-50">Cancelar</button><button class="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700">Guardar</button></div>
+    </div>
+</div>
+@section Scripts {
+<script>
+function showEmailTab(tab) {
+    ['accounts','smtp','esettings'].forEach(function(t) {
+        document.getElementById('epanel-'+t).classList.toggle('hidden', t !== tab);
+        var btn = document.getElementById('etab-'+t);
+        if(btn) { btn.classList.toggle('border-indigo-600',t===tab); btn.classList.toggle('text-indigo-600',t===tab); btn.classList.toggle('border-transparent',t!==tab); btn.classList.toggle('text-gray-500',t!==tab); }
+    });
+}
+</script>
+}

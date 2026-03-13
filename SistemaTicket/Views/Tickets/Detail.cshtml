@@ -1,0 +1,176 @@
+﻿@{
+    ViewData["Title"] = "Ticket #100249";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Modales -->
+<div id="modalTransfer" class="hidden fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
+    <div class="bg-white rounded-xl shadow-xl w-full max-w-md mx-4 p-6">
+        <h3 class="font-semibold text-gray-900 mb-4">↗️ Transferir ticket</h3>
+        <div class="space-y-3">
+            <div><label class="block text-xs font-medium text-gray-600 mb-1">Departamento destino</label><select class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"><option>Hardware</option><option>Facturación</option><option>RRHH</option></select></div>
+            <div><label class="block text-xs font-medium text-gray-600 mb-1">Motivo</label><textarea rows="2" class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"></textarea></div>
+        </div>
+        <div class="flex justify-end gap-2 mt-4"><button onclick="document.getElementById('modalTransfer').classList.add('hidden')" class="px-3 py-2 text-sm border border-gray-200 rounded-lg hover:bg-gray-50">Cancelar</button><button class="px-4 py-2 text-sm bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">Transferir</button></div>
+    </div>
+</div>
+<div id="modalMerge" class="hidden fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
+    <div class="bg-white rounded-xl shadow-xl w-full max-w-md mx-4 p-6">
+        <h3 class="font-semibold text-gray-900 mb-4">🔀 Fusionar tickets</h3>
+        <div><label class="block text-xs font-medium text-gray-600 mb-1">Número de ticket a fusionar</label><input type="text" placeholder="Ej: 100245" class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" /></div>
+        <div class="flex justify-end gap-2 mt-4"><button onclick="document.getElementById('modalMerge').classList.add('hidden')" class="px-3 py-2 text-sm border border-gray-200 rounded-lg hover:bg-gray-50">Cancelar</button><button class="px-4 py-2 text-sm bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">Fusionar</button></div>
+    </div>
+</div>
+<div id="modalLink" class="hidden fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
+    <div class="bg-white rounded-xl shadow-xl w-full max-w-md mx-4 p-6">
+        <h3 class="font-semibold text-gray-900 mb-4">🔗 Vincular ticket</h3>
+        <div class="space-y-3">
+            <div><label class="block text-xs font-medium text-gray-600 mb-1">Ticket relacionado</label><input type="text" placeholder="Ej: 100240" class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" /></div>
+            <div><label class="block text-xs font-medium text-gray-600 mb-1">Tipo de relación</label><select class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"><option>Duplicado de</option><option>Bloqueado por</option><option>Relacionado con</option></select></div>
+        </div>
+        <div class="flex justify-end gap-2 mt-4"><button onclick="document.getElementById('modalLink').classList.add('hidden')" class="px-3 py-2 text-sm border border-gray-200 rounded-lg hover:bg-gray-50">Cancelar</button><button class="px-4 py-2 text-sm bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">Vincular</button></div>
+    </div>
+</div>
+<!-- Header -->
+<div class="flex items-start justify-between mb-4">
+    <div>
+        <div class="flex items-center gap-2 mb-1">
+            <a asp-controller="Tickets" asp-action="Index" class="text-sm text-gray-400 hover:text-gray-600">← Tickets</a>
+            <span class="text-gray-300">/</span>
+            <span class="text-sm font-medium text-gray-700">#100249</span>
+        </div>
+        <h1 class="text-xl font-bold text-gray-900">Acceso VPN bloqueado</h1>
+        <div class="flex flex-wrap items-center gap-2 mt-2">
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-700">Abierto</span>
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700">Urgente</span>
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Soporte Técnico</span>
+            <span class="text-xs text-red-600 font-medium">⚠ SLA vencido</span>
+        </div>
+    </div>
+    <div class="flex gap-2 flex-shrink-0">
+        <button onclick="document.getElementById('modalTransfer').classList.remove('hidden')" class="px-3 py-2 text-xs border border-gray-200 rounded-lg hover:bg-gray-50">↗️ Transferir</button>
+        <button onclick="document.getElementById('modalMerge').classList.remove('hidden')" class="px-3 py-2 text-xs border border-gray-200 rounded-lg hover:bg-gray-50">🔀 Fusionar</button>
+        <button onclick="document.getElementById('modalLink').classList.remove('hidden')" class="px-3 py-2 text-xs border border-gray-200 rounded-lg hover:bg-gray-50">🔗 Vincular</button>
+    </div>
+</div>
+<div class="grid grid-cols-3 gap-5">
+    <!-- Conversación -->
+    <div class="col-span-2 space-y-4">
+        <!-- Thread -->
+        <div class="space-y-3">
+            <!-- Mensaje usuario -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+                <div class="flex items-start gap-3 mb-3">
+                    <div class="w-8 h-8 rounded-full bg-sky-500 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">PS</div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between"><span class="text-sm font-semibold text-gray-800">Pedro Soto</span><span class="text-xs text-gray-400">Hoy 10:23 AM</span></div>
+                        <div class="text-xs text-gray-400">pedro.soto@empresa.com</div>
+                    </div>
+                </div>
+                <div class="text-sm text-gray-700 pl-11">Desde esta mañana no puedo conectarme a la VPN corporativa. El cliente Cisco AnyConnect muestra el error "certificate mismatch". No he cambiado nada en mi computadora ayer.</div>
+            </div>
+            <!-- Nota interna -->
+            <div class="bg-amber-50 rounded-xl border border-amber-200 p-5">
+                <div class="flex items-start gap-3 mb-3">
+                    <div class="w-8 h-8 rounded-full bg-indigo-500 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">VR</div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between"><span class="text-sm font-semibold text-gray-800">Valentina Ruiz</span><span class="text-xs text-gray-400">Hoy 10:45 AM</span></div>
+                        <div class="flex items-center gap-1 text-xs text-amber-600 font-medium">🔒 Nota interna</div>
+                    </div>
+                </div>
+                <div class="text-sm text-gray-700 pl-11">Revisando el servidor VPN — parece que el certificado SSL venció hace 2 días. Contacté a Red y Comunicaciones para renovación urgente.</div>
+            </div>
+            <!-- Respuesta agente -->
+            <div class="bg-indigo-50 rounded-xl border border-indigo-100 p-5">
+                <div class="flex items-start gap-3 mb-3">
+                    <div class="w-8 h-8 rounded-full bg-indigo-500 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">VR</div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between"><span class="text-sm font-semibold text-gray-800">Valentina Ruiz</span><span class="text-xs text-gray-400">Hoy 11:02 AM</span></div>
+                        <div class="text-xs text-gray-400">Agente → Cliente</div>
+                    </div>
+                </div>
+                <div class="text-sm text-gray-700 pl-11">Hola Pedro, hemos identificado el problema. El certificado del servidor VPN venció ayer. Actualmente estamos trabajando en renovarlo con el equipo de Redes. En 30 minutos debería estar resuelto. Te notificaremos cuando puedas conectarte nuevamente.</div>
+            </div>
+        </div>
+        <!-- Panel de respuesta -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+            <div class="flex gap-1 mb-3 bg-gray-100 p-1 rounded-lg w-fit">
+                <button id="tabReply" onclick="switchTab('reply')" class="px-4 py-1.5 rounded-md text-xs font-medium bg-white shadow-sm text-gray-800">💬 Responder</button>
+                <button id="tabNote" onclick="switchTab('note')" class="px-4 py-1.5 rounded-md text-xs font-medium text-gray-500 hover:text-gray-700">🔒 Nota interna</button>
+            </div>
+            <div id="panelReply">
+                <div class="mb-2 text-xs text-gray-500 flex gap-2"><span>Para: pedro.soto@empresa.com</span></div>
+                <textarea rows="5" placeholder="Escribe tu respuesta al cliente..." class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300 mb-3"></textarea>
+            </div>
+            <div id="panelNote" class="hidden">
+                <textarea rows="5" placeholder="Nota interna (no visible para el cliente)..." class="w-full rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-300 mb-3"></textarea>
+            </div>
+            <div class="flex items-center justify-between">
+                <div class="flex gap-2"><label class="flex items-center gap-1.5 text-xs text-gray-500"><input type="checkbox" class="rounded text-indigo-600" /> Cerrar al enviar</label><label class="flex items-center gap-1.5 text-xs text-gray-500"><input type="checkbox" class="rounded text-indigo-600" /> Marcar resuelto</label></div>
+                <div class="flex gap-2"><button class="text-xs px-3 py-2 border border-gray-200 rounded-lg hover:bg-gray-50">📎 Adjuntar</button><button class="text-xs px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium">Enviar respuesta</button></div>
+            </div>
+        </div>
+    </div>
+    <!-- Sidebar -->
+    <div class="space-y-4">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+            <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Información</h3>
+            <div class="space-y-3">
+                <div><div class="text-xs text-gray-400 mb-0.5">Estado</div><select class="w-full rounded-lg border border-gray-200 px-2.5 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-300"><option>Abierto</option><option>En proceso</option><option>Esperando cliente</option><option>Resuelto</option><option>Cerrado</option></select></div>
+                <div><div class="text-xs text-gray-400 mb-0.5">Prioridad</div><select class="w-full rounded-lg border border-gray-200 px-2.5 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-300"><option>Urgente</option><option>Alta</option><option>Normal</option><option>Baja</option></select></div>
+                <div><div class="text-xs text-gray-400 mb-0.5">Departamento</div><select class="w-full rounded-lg border border-gray-200 px-2.5 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-300"><option>Soporte Técnico</option><option>Hardware</option><option>Facturación</option><option>RRHH</option></select></div>
+                <div><div class="text-xs text-gray-400 mb-0.5">SLA</div><p class="text-xs font-medium text-red-600">&#9888; Crítico — 2h (vencido)</p></div>
+                <div><div class="text-xs text-gray-400 mb-0.5">Creado</div><p class="text-xs text-gray-700">15/01/2026 10:23 AM</p></div>
+            </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+            <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Asignación</h3>
+            <div class="space-y-3">
+                <div>
+                    <div class="text-xs text-gray-400 mb-1">Agente</div>
+                    <div class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-gray-100">
+                        <div class="w-7 h-7 rounded-full bg-indigo-500 text-white text-[10px] font-bold flex items-center justify-center">VR</div>
+                        <div><div class="text-xs font-medium text-gray-800">Valentina Ruiz</div><div class="text-[10px] text-gray-400">Senior Support</div></div>
+                    </div>
+                    <button class="mt-1.5 w-full text-xs text-indigo-500 hover:underline text-left">Cambiar agente</button>
+                </div>
+                <div>
+                    <div class="text-xs text-gray-400 mb-1">Equipo</div>
+                    <div class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-gray-100"><span class="text-xs font-medium text-gray-700">🏢 Nivel 1</span></div>
+                    <button class="mt-1.5 w-full text-xs text-indigo-500 hover:underline text-left">Cambiar equipo</button>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+            <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Usuario</h3>
+            <div class="flex items-center gap-2 mb-3">
+                <div class="w-9 h-9 rounded-full bg-sky-500 text-white text-sm font-bold flex items-center justify-center">PS</div>
+                <div><div class="text-sm font-medium text-gray-800">Pedro Soto</div><div class="text-xs text-gray-400">pedro.soto@empresa.com</div></div>
+            </div>
+            <div class="text-xs text-gray-500 space-y-1"><div>📞 +54 9 11 5678-9012</div><div>🏢 TechCorp S.A.</div></div>
+            <div class="mt-3 pt-3 border-t border-gray-100">
+                <div class="text-xs text-gray-400 mb-1">Tickets anteriores</div>
+                <div class="space-y-1">
+                    <div class="flex items-center justify-between text-xs"><span class="text-indigo-600 hover:underline cursor-pointer">#100237</span><span class="text-gray-400">hace 2 semanas</span></div>
+                    <div class="flex items-center justify-between text-xs"><span class="text-indigo-600 hover:underline cursor-pointer">#100201</span><span class="text-gray-400">hace 2 meses</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function switchTab(tab) {
+    var reply = document.getElementById('panelReply');
+    var note = document.getElementById('panelNote');
+    var tR = document.getElementById('tabReply');
+    var tN = document.getElementById('tabNote');
+    if (tab === 'reply') {
+        reply.classList.remove('hidden'); note.classList.add('hidden');
+        tR.className = 'px-4 py-1.5 rounded-md text-xs font-medium bg-white shadow-sm text-gray-800';
+        tN.className = 'px-4 py-1.5 rounded-md text-xs font-medium text-gray-500 hover:text-gray-700';
+    } else {
+        note.classList.remove('hidden'); reply.classList.add('hidden');
+        tN.className = 'px-4 py-1.5 rounded-md text-xs font-medium bg-white shadow-sm text-gray-800';
+        tR.className = 'px-4 py-1.5 rounded-md text-xs font-medium text-gray-500 hover:text-gray-700';
+    }
+}
+</script>

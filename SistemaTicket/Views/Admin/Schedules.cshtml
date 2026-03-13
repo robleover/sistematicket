@@ -1,0 +1,202 @@
+@{
+    ViewData["Title"] = "Horarios";
+    ViewData["Breadcrumb"] = "6.7 Horarios de Atención";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    var days = new[] {
+        new { Key = "lunes",     Label = "Lunes",     Active = true,  Start = "09:00", End = "18:00" },
+        new { Key = "martes",    Label = "Martes",    Active = true,  Start = "09:00", End = "18:00" },
+        new { Key = "miercoles", Label = "Miércoles", Active = true,  Start = "09:00", End = "18:00" },
+        new { Key = "jueves",    Label = "Jueves",    Active = true,  Start = "09:00", End = "18:00" },
+        new { Key = "viernes",   Label = "Viernes",   Active = true,  Start = "09:00", End = "18:00" },
+        new { Key = "sabado",    Label = "Sábado",    Active = false, Start = "09:00", End = "14:00" },
+        new { Key = "domingo",   Label = "Domingo",   Active = false, Start = "09:00", End = "14:00" },
+    };
+}
+
+<div class="flex items-center justify-between mb-6">
+    <div>
+        <h1 class="text-xl font-bold text-gray-900">🕐 Horarios de Atención</h1>
+        <p class="text-sm text-gray-500 mt-0.5">Admin Panel › Manage › Schedules</p>
+    </div>
+    <button onclick="document.getElementById('modalNewSchedule').classList.remove('hidden')" class="btn-primary btn-sm">+ Nuevo Horario</button>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+    <!-- Horario Laboral Chile -->
+    <div class="card p-5">
+        <div class="flex items-start justify-between mb-4">
+            <div>
+                <h2 class="text-base font-semibold text-gray-800">📅 Horario Laboral Chile</h2>
+                <p class="text-xs text-gray-500 mt-0.5">America/Santiago · UTC-4</p>
+            </div>
+            <span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700">Activo</span>
+        </div>
+        <div class="space-y-1.5 mb-4">
+            <div class="flex justify-between text-sm py-1 border-b border-gray-50">
+                <span class="text-gray-600 font-medium">Lunes</span>
+                <span class="text-emerald-700 font-medium">09:00 – 18:00</span>
+            </div>
+            <div class="flex justify-between text-sm py-1 border-b border-gray-50">
+                <span class="text-gray-600 font-medium">Martes</span>
+                <span class="text-emerald-700 font-medium">09:00 – 18:00</span>
+            </div>
+            <div class="flex justify-between text-sm py-1 border-b border-gray-50">
+                <span class="text-gray-600 font-medium">Miércoles</span>
+                <span class="text-emerald-700 font-medium">09:00 – 18:00</span>
+            </div>
+            <div class="flex justify-between text-sm py-1 border-b border-gray-50">
+                <span class="text-gray-600 font-medium">Jueves</span>
+                <span class="text-emerald-700 font-medium">09:00 – 18:00</span>
+            </div>
+            <div class="flex justify-between text-sm py-1 border-b border-gray-50">
+                <span class="text-gray-600 font-medium">Viernes</span>
+                <span class="text-emerald-700 font-medium">09:00 – 18:00</span>
+            </div>
+            <div class="flex justify-between text-sm py-1 border-b border-gray-50">
+                <span class="text-gray-500">Sábado</span>
+                <span class="text-gray-400">Cerrado</span>
+            </div>
+            <div class="flex justify-between text-sm py-1">
+                <span class="text-gray-500">Domingo</span>
+                <span class="text-gray-400">Cerrado</span>
+            </div>
+        </div>
+        <div>
+            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Feriados excluidos</p>
+            <div class="flex flex-wrap gap-1.5">
+                <span class="inline-flex px-2 py-0.5 rounded text-xs bg-red-50 text-red-700 border border-red-100">01 Ene</span>
+                <span class="inline-flex px-2 py-0.5 rounded text-xs bg-red-50 text-red-700 border border-red-100">18 Sep</span>
+                <span class="inline-flex px-2 py-0.5 rounded text-xs bg-red-50 text-red-700 border border-red-100">25 Dic</span>
+            </div>
+        </div>
+        <div class="flex gap-2 mt-4 pt-4 border-t border-gray-100">
+            <button class="btn-secondary btn-sm">✏️ Editar</button>
+            <button class="btn-sm px-3 py-1.5 text-xs rounded-lg bg-red-50 text-red-600 border border-red-200 hover:bg-red-100">Eliminar</button>
+        </div>
+    </div>
+
+    <!-- 24/7 Ininterrumpido -->
+    <div class="card p-5">
+        <div class="flex items-start justify-between mb-4">
+            <div>
+                <h2 class="text-base font-semibold text-gray-800">⚡ 24/7 Ininterrumpido</h2>
+                <p class="text-xs text-gray-500 mt-0.5">UTC · Coordinated Universal Time</p>
+            </div>
+            <span class="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700">Activo</span>
+        </div>
+        <div class="space-y-1.5 mb-4">
+            @foreach (var d in days)
+            {
+                <div class="flex justify-between text-sm py-1 border-b border-gray-50">
+                    <span class="text-gray-600 font-medium">@d.Label</span>
+                    <span class="text-emerald-700 font-medium">00:00 – 23:59</span>
+                </div>
+            }
+        </div>
+        <div>
+            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Feriados excluidos</p>
+            <p class="text-xs text-gray-400 italic">Sin feriados — disponible los 365 días del año</p>
+        </div>
+        <div class="flex gap-2 mt-4 pt-4 border-t border-gray-100">
+            <button class="btn-secondary btn-sm">✏️ Editar</button>
+            <button class="btn-sm px-3 py-1.5 text-xs rounded-lg bg-red-50 text-red-600 border border-red-200 hover:bg-red-100">Eliminar</button>
+        </div>
+    </div>
+</div>
+
+<div class="rounded-xl bg-sky-50 border border-sky-200 p-4 flex gap-3 text-sm text-sky-800">
+    <span class="mt-0.5 shrink-0">ℹ️</span>
+    <p>Los horarios se asignan a los <strong>Planes de SLA</strong> para calcular el tiempo de respuesta únicamente en horas hábiles. El horario "24/7 Ininterrumpido" es recomendado para SLAs críticos.</p>
+</div>
+
+<!-- Modal Nuevo Horario -->
+<div id="modalNewSchedule" class="hidden fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+        <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100 sticky top-0 bg-white">
+            <h3 class="text-base font-semibold">Nuevo Horario de Atención</h3>
+            <button onclick="document.getElementById('modalNewSchedule').classList.add('hidden')" class="text-gray-400 hover:text-gray-600 text-xl leading-none">&times;</button>
+        </div>
+        <div class="p-5 space-y-4">
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="form-label">Nombre del horario <span class="text-red-500">*</span></label>
+                    <input type="text" class="form-input" placeholder="ej. Horario Laboral Chile" />
+                </div>
+                <div>
+                    <label class="form-label">Zona horaria</label>
+                    <select class="form-select">
+                        <option>America/Santiago (UTC-4)</option>
+                        <option>UTC (Coordinated Universal Time)</option>
+                        <option>America/New_York (UTC-5)</option>
+                        <option>Europe/Madrid (UTC+1)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <p class="form-label mb-2">Días y horarios de atención</p>
+                <div class="border border-gray-200 rounded-xl overflow-hidden">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="bg-slate-50">
+                                <th class="table-th w-8">Activo</th>
+                                <th class="table-th">Día</th>
+                                <th class="table-th">Desde</th>
+                                <th class="table-th">Hasta</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-50">
+                            @foreach (var d in days)
+                            {
+                                <tr class="hover:bg-slate-50/50" id="row-@d.Key">
+                                    <td class="table-td text-center">
+                                        <input type="checkbox"
+                                               id="chk-@d.Key"
+                                               @(d.Active ? "checked" : "")
+                                               class="w-4 h-4 rounded accent-indigo-600"
+                                               onchange="toggleDay('@d.Key')" />
+                                    </td>
+                                    <td class="table-td font-medium text-gray-700">@d.Label</td>
+                                    <td class="table-td">
+                                        <input type="time"
+                                               id="start-@d.Key"
+                                               value="@d.Start"
+                                               class="form-input py-1 text-xs @(!d.Active ? "opacity-40 pointer-events-none" : "")"
+                                               @(!d.Active ? "disabled" : "") />
+                                    </td>
+                                    <td class="table-td">
+                                        <input type="time"
+                                               id="end-@d.Key"
+                                               value="@d.End"
+                                               class="form-input py-1 text-xs @(!d.Active ? "opacity-40 pointer-events-none" : "")"
+                                               @(!d.Active ? "disabled" : "") />
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-end gap-2 px-5 py-4 border-t border-gray-100 sticky bottom-0 bg-white">
+            <button onclick="document.getElementById('modalNewSchedule').classList.add('hidden')" class="btn-secondary btn-sm">Cancelar</button>
+            <button class="btn-primary btn-sm">Guardar Horario</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleDay(day) {
+    const chk = document.getElementById('chk-' + day);
+    const start = document.getElementById('start-' + day);
+    const end = document.getElementById('end-' + day);
+    if (chk.checked) {
+        start.disabled = false; start.classList.remove('opacity-40', 'pointer-events-none');
+        end.disabled = false;   end.classList.remove('opacity-40', 'pointer-events-none');
+    } else {
+        start.disabled = true; start.classList.add('opacity-40', 'pointer-events-none');
+        end.disabled = true;   end.classList.add('opacity-40', 'pointer-events-none');
+    }
+}
+</script>

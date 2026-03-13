@@ -1,0 +1,104 @@
+﻿@{
+    ViewData["Title"] = "Gestión de Tickets";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="flex items-center justify-between mb-5">
+    <div>
+        <h1 class="text-xl font-bold text-gray-900">🎫 Gestión de Tickets</h1>
+        <p class="text-sm text-gray-500 mt-0.5">Secciones 7.1 — 7.6 del manual</p>
+    </div>
+    <a asp-controller="Tickets" asp-action="Create" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition-colors">➕ Nuevo Ticket</a>
+</div>
+<!-- Ciclo de vida -->
+<div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 mb-5">
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">Ciclo de vida</p>
+    <div class="flex items-center gap-1 flex-wrap">
+        <span class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-medium bg-blue-600 text-white">📥 Nuevo</span>
+        <svg class="w-4 h-4 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-medium bg-indigo-100 text-indigo-700">👤 Asignado</span>
+        <svg class="w-4 h-4 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-medium bg-amber-100 text-amber-700">🔄 En proceso</span>
+        <svg class="w-4 h-4 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-medium bg-orange-100 text-orange-700">⏳ Esperando cliente</span>
+        <svg class="w-4 h-4 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-medium bg-emerald-100 text-emerald-700">✅ Resuelto</span>
+        <svg class="w-4 h-4 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-medium bg-gray-200 text-gray-600">🔒 Cerrado</span>
+    </div>
+</div>
+<!-- Filtros -->
+<div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 mb-4">
+    <div class="flex flex-wrap gap-2 items-end">
+        <div><label class="block text-xs text-gray-500 mb-1">Estado</label><select class="rounded-lg border border-gray-200 px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300"><option>Todos</option><option>Abierto</option><option>En proceso</option><option>Resuelto</option><option>Cerrado</option></select></div>
+        <div><label class="block text-xs text-gray-500 mb-1">Prioridad</label><select class="rounded-lg border border-gray-200 px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300"><option>Todas</option><option>Urgente</option><option>Alta</option><option>Normal</option><option>Baja</option></select></div>
+        <div><label class="block text-xs text-gray-500 mb-1">Departamento</label><select class="rounded-lg border border-gray-200 px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300"><option>Todos</option><option>Soporte Técnico</option><option>Hardware</option><option>Facturación</option><option>RRHH</option></select></div>
+        <div><label class="block text-xs text-gray-500 mb-1">Agente</label><select class="rounded-lg border border-gray-200 px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300"><option>Todos</option><option>Valentina Ruiz</option><option>Matías Fernández</option><option>Sofía Morales</option><option>Diego Castillo</option></select></div>
+        <div><label class="block text-xs text-gray-500 mb-1">Buscar</label><input type="search" placeholder="Número o asunto..." class="rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300 w-52" /></div>
+        <button class="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition-colors">🔍 Filtrar</button>
+    </div>
+</div>
+<!-- Tabs -->
+<div class="flex gap-1 mb-3 bg-gray-100 p-1 rounded-lg w-fit">
+    <button class="px-4 py-1.5 rounded-md text-sm font-medium bg-white shadow-sm text-gray-800">Todos (38)</button>
+    <button class="px-4 py-1.5 rounded-md text-sm font-medium text-gray-500 hover:text-gray-700">Míos (14)</button>
+    <button class="px-4 py-1.5 rounded-md text-sm font-medium text-gray-500 hover:text-gray-700">Sin asignar (7)</button>
+    <button class="px-4 py-1.5 rounded-md text-sm font-medium text-red-500 hover:text-red-700">Vencidos SLA (5)</button>
+</div>
+<!-- Table -->
+<div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+    <table class="w-full text-sm">
+        <thead><tr class="bg-slate-50 border-b border-gray-100"><th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">#</th><th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Asunto</th><th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Usuario</th><th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Agente</th><th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Prioridad</th><th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Estado</th><th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">SLA</th><th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Actualizado</th></tr></thead>
+        <tbody class="divide-y divide-gray-50">
+            <tr class="hover:bg-red-50/40 transition-colors border-l-4 border-l-red-500">
+                <td class="pl-3 pr-4 py-3 text-xs text-gray-400 font-mono">100249</td>
+                <td class="px-4 py-3"><a asp-controller="Tickets" asp-action="Detail" asp-route-id="100249" class="font-medium text-gray-800 hover:text-indigo-600">Acceso VPN bloqueado</a><br><span class="text-xs text-gray-400">Soporte Técnico</span></td>
+                <td class="px-4 py-3 text-gray-600">Pedro Soto</td>
+                <td class="px-4 py-3"><div class="flex items-center gap-1.5"><div class="w-6 h-6 rounded-full bg-indigo-500 text-white text-[10px] font-bold flex items-center justify-center">VR</div><span class="text-xs text-gray-600">V. Ruiz</span></div></td>
+                <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700">Urgente</span></td>
+                <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-700">Abierto</span></td>
+                <td class="px-4 py-3"><span class="text-xs text-red-600 font-medium">⚠ Vencido</span></td>
+                <td class="px-4 py-3 text-xs text-gray-400">hace 2h</td>
+            </tr>
+            <tr class="hover:bg-slate-50/60 transition-colors border-l-4 border-l-orange-400">
+                <td class="pl-3 pr-4 py-3 text-xs text-gray-400 font-mono">100248</td>
+                <td class="px-4 py-3"><a asp-controller="Tickets" asp-action="Detail" asp-route-id="100248" class="font-medium text-gray-800 hover:text-indigo-600">No puedo acceder al sistema</a><br><span class="text-xs text-gray-400">Soporte Técnico</span></td>
+                <td class="px-4 py-3 text-gray-600">Pedro Soto</td>
+                <td class="px-4 py-3"><div class="flex items-center gap-1.5"><div class="w-6 h-6 rounded-full bg-indigo-500 text-white text-[10px] font-bold flex items-center justify-center">VR</div><span class="text-xs text-gray-600">V. Ruiz</span></div></td>
+                <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-700">Alta</span></td>
+                <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-700">Abierto</span></td>
+                <td class="px-4 py-3"><span class="text-xs text-amber-600 font-medium">2h restantes</span></td>
+                <td class="px-4 py-3 text-xs text-gray-400">hace 1h</td>
+            </tr>
+            <tr class="hover:bg-amber-50/40 transition-colors border-l-4 border-l-amber-400">
+                <td class="pl-3 pr-4 py-3 text-xs text-gray-400 font-mono">100247</td>
+                <td class="px-4 py-3"><a asp-controller="Tickets" asp-action="Detail" asp-route-id="100247" class="font-medium text-gray-800 hover:text-indigo-600">Consulta factura enero 2026</a><br><span class="text-xs text-gray-400">Facturación</span></td>
+                <td class="px-4 py-3 text-gray-600">Carlos López</td>
+                <td class="px-4 py-3"><div class="flex items-center gap-1.5"><div class="w-6 h-6 rounded-full bg-pink-500 text-white text-[10px] font-bold flex items-center justify-center">SM</div><span class="text-xs text-gray-600">S. Morales</span></div></td>
+                <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-sky-100 text-sky-700">Normal</span></td>
+                <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-700">Esperando cliente</span></td>
+                <td class="px-4 py-3"><span class="text-xs text-emerald-600 font-medium">14h restantes</span></td>
+                <td class="px-4 py-3 text-xs text-gray-400">hace 3h</td>
+            </tr>
+            <tr class="hover:bg-slate-50/60 transition-colors border-l-4 border-l-transparent">
+                <td class="pl-3 pr-4 py-3 text-xs text-gray-400 font-mono">100246</td>
+                <td class="px-4 py-3"><a asp-controller="Tickets" asp-action="Detail" asp-route-id="100246" class="font-medium text-gray-800 hover:text-indigo-600">Solicitud de laptop nueva</a><br><span class="text-xs text-gray-400">Hardware</span></td>
+                <td class="px-4 py-3 text-gray-600">María González</td>
+                <td class="px-4 py-3"><div class="flex items-center gap-1.5"><div class="w-6 h-6 rounded-full bg-emerald-500 text-white text-[10px] font-bold flex items-center justify-center">MF</div><span class="text-xs text-gray-600">M. Fernández</span></div></td>
+                <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-sky-100 text-sky-700">Normal</span></td>
+                <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-700">Abierto</span></td>
+                <td class="px-4 py-3"><span class="text-xs text-gray-400">48h restantes</span></td>
+                <td class="px-4 py-3 text-xs text-gray-400">hace 5h</td>
+            </tr>
+            <tr class="hover:bg-slate-50/60 transition-colors border-l-4 border-l-transparent">
+                <td class="pl-3 pr-4 py-3 text-xs text-gray-400 font-mono">100245</td>
+                <td class="px-4 py-3"><a asp-controller="Tickets" asp-action="Detail" asp-route-id="100245" class="font-medium text-gray-800 hover:text-indigo-600">Error al iniciar sesión en ERP</a><br><span class="text-xs text-gray-400">Soporte Técnico</span></td>
+                <td class="px-4 py-3 text-gray-600">Juan Pérez</td>
+                <td class="px-4 py-3"><div class="flex items-center gap-1.5"><div class="w-6 h-6 rounded-full bg-sky-500 text-white text-[10px] font-bold flex items-center justify-center">DC</div><span class="text-xs text-gray-600">D. Castillo</span></div></td>
+                <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-700">Alta</span></td>
+                <td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700">Resuelto</span></td>
+                <td class="px-4 py-3"><span class="text-xs text-emerald-600 font-medium">✓ Dentro del SLA</span></td>
+                <td class="px-4 py-3 text-xs text-gray-400">hace 1 día</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

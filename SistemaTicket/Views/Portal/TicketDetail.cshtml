@@ -1,0 +1,261 @@
+@{
+    ViewData["Title"] = "Ticket #100248";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <!-- Cabecera del ticket -->
+        <div class="d-flex justify-content-between align-items-start mb-3">
+            <div>
+                <div class="d-flex align-items-center gap-2 mb-1">
+                    <a asp-controller="Portal" asp-action="MyTickets" class="text-decoration-none text-muted small">← Mis Tickets</a>
+                    <span class="text-muted">/</span>
+                    <span class="small text-muted">Ticket #100248</span>
+                </div>
+                <h4 class="mb-1 fw-bold">No puedo acceder al sistema desde ayer</h4>
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <span class="badge bg-danger">Abierto</span>
+                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle">🔴 Urgente</span>
+                    <span class="text-muted small">Ticket #100248</span>
+                    <span class="text-muted small">•</span>
+                    <span class="text-muted small">Abierto el 15 ene 2025 09:15</span>
+                    <span class="text-muted small">•</span>
+                    <span class="text-muted small">Departamento: Soporte Técnico</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Columna principal: conversación -->
+    <div class="col-lg-8">
+
+        <!-- Mensaje original del cliente -->
+        <div class="card border-0 shadow-sm mb-3">
+            <div class="card-header bg-white d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold small"
+                         style="width:32px;height:32px;">PS</div>
+                    <div>
+                        <span class="fw-semibold small">Pedro Soto</span>
+                        <span class="text-muted small ms-1">(Tú)</span>
+                    </div>
+                </div>
+                <small class="text-muted">15 ene 2025, 09:15</small>
+            </div>
+            <div class="card-body">
+                <p class="mb-0">Hola, desde ayer por la mañana no puedo ingresar al sistema de gestión. Aparece el siguiente error:</p>
+                <div class="alert alert-light border font-monospace small mt-2 mb-2">
+                    Error: "Authentication failed — token expired or invalid. Contact your administrator."
+                </div>
+                <p class="mb-0">El problema ocurre en Chrome y en Edge. Ya probé cerrar sesión y volver a entrar pero el error persiste. Mi usuario es pedro.soto@@empresa.cl</p>
+            </div>
+        </div>
+
+        <!-- Respuesta del agente -->
+        <div class="card border-0 shadow-sm mb-3" style="background-color:#f0f7ff;">
+            <div class="card-header d-flex align-items-center justify-content-between" style="background-color:#ddeeff;">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center fw-bold small"
+                         style="width:32px;height:32px;">VR</div>
+                    <div>
+                        <span class="fw-semibold small">Valentina Ruiz</span>
+                        <span class="badge bg-success-subtle text-success small ms-1">Agente de soporte</span>
+                    </div>
+                </div>
+                <small class="text-muted">15 ene 2025, 10:42</small>
+            </div>
+            <div class="card-body">
+                <p>Estimado Pedro,</p>
+                <p>Gracias por contactarnos. He revisado tu cuenta y efectivamente el token de sesión expiro de forma forzada por un reinicio de seguridad que realizamos en el servidor.</p>
+                <p>Por favor haz lo siguiente:</p>
+                <ol class="mb-2">
+                    <li>Abre el navegador en modo incógnito (Ctrl + Shift + N)</li>
+                    <li>Dirígete a <strong>sistema.empresa.cl/login</strong></li>
+                    <li>Ingresa tu usuario y contraseña habitual</li>
+                    <li>Si solicita un código de verificación, revisa tu email con el código de 6 dígitos</li>
+                </ol>
+                <p class="mb-0">Avísame si el problema persiste y generaremos un nuevo token manualmente desde el panel de administración.</p>
+                <p class="text-muted small mt-2 mb-0">Valentina Ruiz — Soporte Técnico</p>
+            </div>
+        </div>
+
+        <!-- Segunda respuesta del cliente -->
+        <div class="card border-0 shadow-sm mb-3">
+            <div class="card-header bg-white d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold small"
+                         style="width:32px;height:32px;">PS</div>
+                    <div>
+                        <span class="fw-semibold small">Pedro Soto</span>
+                        <span class="text-muted small ms-1">(Tú)</span>
+                    </div>
+                </div>
+                <small class="text-muted">15 ene 2025, 11:05</small>
+            </div>
+            <div class="card-body">
+                <p class="mb-0">Seguí los pasos pero en el paso 4 no me llegó ningún código al email. Esperé 10 minutos y revisé el spam también. El acceso sigue bloqueado.</p>
+            </div>
+        </div>
+
+        <!-- Estado: esperando agente -->
+        <div class="alert alert-primary d-flex align-items-center gap-2 small mb-3">
+            <span>⏳</span>
+            <span>El agente ha sido notificado de tu última respuesta y trabajará en una solución. Te responderemos pronto.</span>
+        </div>
+
+        <!-- Formulario de respuesta del cliente -->
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white fw-semibold">💬 Añadir Respuesta</div>
+            <div class="card-body">
+                <textarea class="form-control mb-3" rows="5"
+                          placeholder="Escribe aquí tu respuesta o cualquier información adicional que pueda ayudar a resolver el problema..."></textarea>
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold">Adjuntar archivos</label>
+                    <input type="file" class="form-control form-control-sm" multiple />
+                    <div class="form-text">Capturas de pantalla, logs, etc. Máx. 20 MB por archivo</div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="markResolved" />
+                        <label class="form-check-label small" for="markResolved">
+                            ✅ Marcar como resuelto (el problema fue solucionado)
+                        </label>
+                    </div>
+                    <button class="btn btn-primary">📨 Enviar Respuesta</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Columna lateral: info del ticket (versión cliente) -->
+    <div class="col-lg-4 mt-3 mt-lg-0">
+
+        <!-- Info básica -->
+        <div class="card border-0 shadow-sm mb-3">
+            <div class="card-header bg-white fw-semibold small">📋 Información del Ticket</div>
+            <div class="card-body p-0">
+                <table class="table table-sm mb-0 small">
+                    <tbody>
+                        <tr>
+                            <td class="text-muted ps-3">Número</td>
+                            <td class="fw-semibold pe-3">#100248</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted ps-3">Estado</td>
+                            <td class="pe-3"><span class="badge bg-danger">Abierto</span></td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted ps-3">Prioridad</td>
+                            <td class="pe-3"><span class="badge bg-danger-subtle text-danger border border-danger-subtle small">🔴 Urgente</span></td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted ps-3">Departamento</td>
+                            <td class="pe-3">Soporte Técnico</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted ps-3">Tipo</td>
+                            <td class="pe-3">Acceso / Login</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted ps-3">Creado</td>
+                            <td class="pe-3">15 ene 2025, 09:15</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted ps-3">Actualizado</td>
+                            <td class="pe-3">hace 1 hora</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Agente asignado -->
+        <div class="card border-0 shadow-sm mb-3">
+            <div class="card-header bg-white fw-semibold small">👤 Agente Asignado</div>
+            <div class="card-body">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center fw-bold"
+                         style="width:40px;height:40px;">VR</div>
+                    <div>
+                        <div class="fw-semibold small">Valentina Ruiz</div>
+                        <div class="text-muted small">Soporte Técnico — Nivel 1</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLA -->
+        <div class="card border-0 shadow-sm mb-3">
+            <div class="card-header bg-white fw-semibold small">⏱ Tiempo de Respuesta</div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between small mb-1">
+                    <span class="text-muted">SLA objetivo:</span>
+                    <span>SLA Crítico — 1 hora</span>
+                </div>
+                <div class="d-flex justify-content-between small mb-2">
+                    <span class="text-muted">Primera respuesta:</span>
+                    <span class="text-success fw-semibold">✔ Respondido en 1h 27min</span>
+                </div>
+                <div class="progress" style="height:8px;">
+                    <div class="progress-bar bg-success" style="width:75%"></div>
+                </div>
+                <div class="small text-muted mt-1">Cumplimiento SLA: 75%</div>
+            </div>
+        </div>
+
+        <!-- Acciones del cliente -->
+        <div class="card border-0 shadow-sm mb-3">
+            <div class="card-header bg-white fw-semibold small">⚡ Acciones</div>
+            <div class="card-body d-grid gap-2">
+                <button class="btn btn-outline-success btn-sm">✅ Marcar como Resuelto</button>
+                <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#reopen">
+                    🔄 Solicitar Reapertura
+                </button>
+                <a asp-controller="Portal" asp-action="NewTicket" class="btn btn-outline-primary btn-sm">
+                    ➕ Abrir Nuevo Ticket
+                </a>
+                <a asp-controller="Portal" asp-action="MyTickets" class="btn btn-link btn-sm text-muted">
+                    ← Volver a Mis Tickets
+                </a>
+            </div>
+        </div>
+
+        <!-- Encuesta (si cerrado) -->
+        <div class="card border-0 shadow-sm border-top border-primary">
+            <div class="card-body text-center small">
+                <div class="fw-semibold mb-2">📊 Califica el servicio</div>
+                <div class="text-muted mb-2">Una vez cerrado el ticket podrás calificar la atención recibida</div>
+                <div class="d-flex justify-content-center gap-3" style="font-size:1.5rem;">
+                    <span role="button" title="Muy insatisfecho">😠</span>
+                    <span role="button" title="Insatisfecho">😕</span>
+                    <span role="button" title="Neutral">😐</span>
+                    <span role="button" title="Satisfecho">😊</span>
+                    <span role="button" title="Muy satisfecho">😄</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal reapertura -->
+<div class="modal fade" id="reopen" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">🔄 Solicitar Reapertura</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p class="small text-muted">Si el problema que reportaste no fue resuelto, puedes solicitar la reapertura del ticket.</p>
+                <label class="form-label fw-semibold small">Motivo de la reapertura</label>
+                <textarea class="form-control" rows="3" placeholder="Explica por qué necesitas reabrir este ticket..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                <button class="btn btn-warning btn-sm">🔄 Solicitar Reapertura</button>
+            </div>
+        </div>
+    </div>
+</div>

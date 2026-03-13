@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SistemaTicket</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { DEFAULT: '#6366f1', dark: '#4f46e5', light: '#818cf8' },
+                        surface: '#f8fafc',
+                        sidebar: '#1e1b4b'
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @@layer components {
+            .btn-primary { @@apply inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-brand text-white text-sm font-medium hover:bg-brand-dark transition-colors; }
+            .btn-secondary { @@apply inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors; }
+            .btn-danger { @@apply inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-red-600 text-white text-sm font-medium hover:bg-red-700 transition-colors; }
+            .btn-sm { @@apply px-3 py-1.5 text-xs; }
+            .card { @@apply bg-white rounded-xl shadow-sm border border-gray-100; }
+            .badge-open { @@apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-700; }
+            .badge-closed { @@apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600; }
+            .badge-urgent { @@apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700; }
+            .badge-high { @@apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-700; }
+            .badge-normal { @@apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-sky-100 text-sky-700; }
+            .badge-low { @@apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700; }
+            .badge-waiting { @@apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-700; }
+            .badge-resolved { @@apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700; }
+            .form-input { @@apply w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand transition; }
+            .form-select { @@apply w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand transition bg-white; }
+            .form-label { @@apply block text-xs font-semibold text-gray-600 mb-1; }
+            .table-header { @@apply text-xs font-semibold text-gray-500 uppercase tracking-wide; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-gray-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Topbar -->
+    <header class="bg-[#1e1b4b] shadow-md sticky top-0 z-50">
+        <div class="px-4 flex items-center justify-between h-14">
+            <!-- Brand -->
+            <a asp-controller="Home" asp-action="Index" class="flex items-center gap-2 text-white font-bold text-base tracking-tight">
+                <span class="text-indigo-300 text-xl">🎫</span> SistemaTicket
+            </a>
+
+            <!-- Nav links -->
+            <nav class="hidden md:flex items-center gap-1 text-sm">
+                <a asp-controller="Portal" asp-action="Index" class="px-3 py-2 text-indigo-200 hover:text-white hover:bg-white/10 rounded-lg transition-colors">🏠 Portal</a>
+
+                <!-- Tickets dropdown -->
+                <div class="relative group">
+                    <button class="flex items-center gap-1 px-3 py-2 text-indigo-200 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
+                        🎫 Tickets <svg class="w-3.5 h-3.5 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="absolute top-full left-0 mt-1 w-56 bg-white rounded-xl shadow-lg border border-gray-100 py-1.5 hidden group-hover:block z-50">
+                        <a asp-controller="Tickets" asp-action="Index" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-700">📋 Lista de Tickets</a>
+                        <a asp-controller="Tickets" asp-action="Create" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-700">➕ Nuevo Ticket</a>
+                        <div class="my-1 border-t border-gray-100"></div>
+                        <a asp-controller="Tickets" asp-action="Detail" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-700">🔍 Detalle #100249</a>
+                    </div>
+                </div>
+
+                <!-- Admin dropdown -->
+                <div class="relative group">
+                    <button class="flex items-center gap-1 px-3 py-2 text-indigo-200 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
+                        ⚙️ Admin <svg class="w-3.5 h-3.5 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="absolute top-full left-0 mt-1 w-64 bg-white rounded-xl shadow-lg border border-gray-100 py-1.5 hidden group-hover:block z-50">
+                        <a asp-controller="Admin" asp-action="Index" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-700">📊 Dashboard</a>
+                        <div class="my-1 border-t border-gray-100"></div>
+                        <span class="block px-4 py-1 text-xs text-gray-400 font-semibold uppercase tracking-wider">Configuración</span>
+                        <a asp-controller="Admin" asp-action="SystemSettings" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-700">⚙️ Ajustes del sistema</a>
+                        <a asp-controller="Admin" asp-action="Email" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-700">📧 Correo electrónico</a>
+                        <a asp-controller="Admin" asp-action="Forms" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-700">📋 Formularios</a>
+                        <div class="my-1 border-t border-gray-100"></div>
+                        <span class="block px-4 py-1 text-xs text-gray-400 font-semibold uppercase tracking-wider">Organización</span>
+                        <a asp-controller="Admin" asp-action="Departments" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-700">🏢 Departamentos</a>
+                        <a asp-controller="Admin" asp-action="Teams" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-700">👥 Equipos</a>
+                        <a asp-controller="Admin" asp-action="Agents" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-700">👤 Agentes</a>
+                        <a asp-controller="Admin" asp-action="Roles" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-700">🔑 Roles</a>
+                        <div class="my-1 border-t border-gray-100"></div>
+                        <span class="block px-4 py-1 text-xs text-gray-400 font-semibold uppercase tracking-wider">Flujo de trabajo</span>
+                        <a asp-controller="Admin" asp-action="HelpTopics" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-700">❓ Temas de ayuda</a>
+                        <a asp-controller="Admin" asp-action="SLAPlans" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-700">⏱️ SLA</a>
+                        <a asp-controller="Admin" asp-action="Schedules" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-700">📅 Horarios</a>
+                        <a asp-controller="Admin" asp-action="Plugins" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-700">🔌 Plugins</a>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- User area -->
+            <div class="flex items-center gap-3">
+                <div class="hidden sm:flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-indigo-500 text-white flex items-center justify-content-center text-xs font-bold flex items-center justify-center">VR</div>
+                    <div class="text-right">
+                        <p class="text-xs text-white font-medium leading-none">Valentina Ruiz</p>
+                        <p class="text-xs text-indigo-300 leading-none mt-0.5">Administrador</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page content -->
+    <main class="flex-1 px-4 sm:px-6 py-6 max-w-screen-2xl mx-auto w-full">
+        @RenderBody()
+    </main>
+
+    <footer class="bg-white border-t border-gray-100 py-3 px-6 mt-auto">
+        <p class="text-xs text-gray-400 text-center">&copy; 2026 — SistemaTicket | Sistema de Gestión de Tickets de Soporte</p>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

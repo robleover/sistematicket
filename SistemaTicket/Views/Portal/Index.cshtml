@@ -1,0 +1,183 @@
+@{
+    ViewData["Title"] = "Portal de Soporte";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Hero Section -->
+<div class="bg-primary text-white rounded-3 p-5 mb-4" style="background: linear-gradient(135deg,#1e3a5f,#2563eb) !important">
+    <div class="row align-items-center">
+        <div class="col-lg-7">
+            <h1 class="fw-bold mb-2">🎫 Mesa de Ayuda</h1>
+            <p class="lead mb-4 opacity-75">¿Cómo podemos ayudarte? Crea un ticket de soporte o consulta nuestra base de conocimiento.</p>
+            <div class="d-flex gap-3 flex-wrap">
+                <a asp-controller="Portal" asp-action="NewTicket" class="btn btn-light btn-lg fw-semibold">
+                    ✉️ Abrir Nuevo Ticket
+                </a>
+                <a asp-controller="Portal" asp-action="MyTickets" class="btn btn-outline-light btn-lg">
+                    📋 Ver Mis Tickets
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-5 text-center d-none d-lg-block">
+            <div style="font-size:8rem;opacity:.2">🎫</div>
+        </div>
+    </div>
+</div>
+
+<!-- Búsqueda KB -->
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-body py-3">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <label class="form-label fw-semibold text-center w-100 mb-2">🔍 Buscar en la Base de Conocimiento</label>
+                <div class="input-group input-group-lg">
+                    <input type="text" class="form-control" placeholder="¿Qué problema tienes? ej. no puedo iniciar sesión..." />
+                    <button class="btn btn-primary">Buscar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Temas populares -->
+<div class="row g-3 mb-4">
+    <div class="col-12 mb-1">
+        <h5 class="fw-bold">Categorías de Soporte</h5>
+        <small class="text-muted">Selecciona el área relacionada con tu solicitud</small>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <a asp-controller="Portal" asp-action="NewTicket" class="text-decoration-none">
+            <div class="card border-0 shadow-sm h-100 text-center p-3 card-hover" style="transition:transform .15s" onmouseenter="this.style.transform='translateY(-3px)'" onmouseleave="this.style.transform='translateY(0)'">
+                <div class="fs-1 mb-2">💻</div>
+                <div class="fw-semibold">Soporte Técnico</div>
+                <div class="text-muted small mt-1">Software, acceso, instalaciones</div>
+                <div class="mt-2">
+                    <span class="badge bg-light text-dark border">Acceso/Login</span>
+                    <span class="badge bg-light text-dark border">Reportes</span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <a asp-controller="Portal" asp-action="NewTicket" class="text-decoration-none">
+            <div class="card border-0 shadow-sm h-100 text-center p-3" style="transition:transform .15s" onmouseenter="this.style.transform='translateY(-3px)'" onmouseleave="this.style.transform='translateY(0)'">
+                <div class="fs-1 mb-2">🖥️</div>
+                <div class="fw-semibold">Hardware</div>
+                <div class="text-muted small mt-1">Equipos, impresoras, periféricos</div>
+                <div class="mt-2">
+                    <span class="badge bg-light text-dark border">Falla de equipo</span>
+                    <span class="badge bg-light text-dark border">Solicitud</span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <a asp-controller="Portal" asp-action="NewTicket" class="text-decoration-none">
+            <div class="card border-0 shadow-sm h-100 text-center p-3" style="transition:transform .15s" onmouseenter="this.style.transform='translateY(-3px)'" onmouseleave="this.style.transform='translateY(0)'">
+                <div class="fs-1 mb-2">🧾</div>
+                <div class="fw-semibold">Facturación</div>
+                <div class="text-muted small mt-1">Facturas, cobros, correcciones</div>
+                <div class="mt-2">
+                    <span class="badge bg-light text-dark border">Consulta</span>
+                    <span class="badge bg-light text-dark border">Corrección</span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <a asp-controller="Portal" asp-action="NewTicket" class="text-decoration-none">
+            <div class="card border-0 shadow-sm h-100 text-center p-3" style="transition:transform .15s" onmouseenter="this.style.transform='translateY(-3px)'" onmouseleave="this.style.transform='translateY(0)'">
+                <div class="fs-1 mb-2">👥</div>
+                <div class="fw-semibold">Recursos Humanos</div>
+                <div class="text-muted small mt-1">Solicitudes de personal, vacaciones</div>
+                <div class="mt-2">
+                    <span class="badge bg-light text-dark border">Solicitudes</span>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<!-- Artículos populares KB -->
+<div class="row g-3">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white fw-semibold">📚 Artículos Populares (Base de Conocimiento)</div>
+            <div class="list-group list-group-flush">
+                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="fw-semibold small">Cómo crear un ticket de soporte</div>
+                        <div class="text-muted" style="font-size:.75rem">Primeros pasos · Publicado: 01 Feb 2026</div>
+                    </div>
+                    <span class="badge bg-light text-dark border">👁 142 vistas</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="fw-semibold small">Cómo restablecer mi contraseña del ERP</div>
+                        <div class="text-muted" style="font-size:.75rem">Software · Publicado: 15 Ene 2026</div>
+                    </div>
+                    <span class="badge bg-light text-dark border">👁 98 vistas</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="fw-semibold small">Instalar el cliente VPN en Windows 11</div>
+                        <div class="text-muted" style="font-size:.75rem">Conectividad · Publicado: 10 Mar 2026</div>
+                    </div>
+                    <span class="badge bg-success text-white border">🆕 Nuevo</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="fw-semibold small">¿Cuánto tarda en resolverse mi solicitud?</div>
+                        <div class="text-muted" style="font-size:.75rem">FAQ · Publicado: 05 Ene 2026</div>
+                    </div>
+                    <span class="badge bg-light text-dark border">👁 76 vistas</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="fw-semibold small">Cómo solicitar un equipo nuevo</div>
+                        <div class="text-muted" style="font-size:.75rem">Hardware · Publicado: 20 Ene 2026</div>
+                    </div>
+                    <span class="badge bg-light text-dark border">👁 54 vistas</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info de contacto y estado -->
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm mb-3">
+            <div class="card-header bg-white fw-semibold">📊 Estado del Servicio</div>
+            <div class="card-body small">
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Soporte Técnico</span>
+                    <span class="text-success fw-semibold">● Operativo</span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Hardware</span>
+                    <span class="text-success fw-semibold">● Operativo</span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Facturación</span>
+                    <span class="text-success fw-semibold">● Operativo</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span>RRHH</span>
+                    <span class="text-warning fw-semibold">● Respuesta limitada</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white fw-semibold">📅 Horario de Atención</div>
+            <div class="card-body small text-muted">
+                <div class="d-flex justify-content-between"><span>Lunes a Viernes</span><strong class="text-dark">09:00 — 18:00</strong></div>
+                <div class="d-flex justify-content-between mt-1"><span>Fines de semana</span><strong class="text-danger">Cerrado</strong></div>
+                <div class="mt-2 text-muted" style="font-size:.75rem">⚠️ Urgencias 24/7 vía ticket categoría Crítica</div>
+            </div>
+        </div>
+    </div>
+</div>

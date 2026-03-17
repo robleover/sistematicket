@@ -30,26 +30,36 @@
         <div class="flex justify-end gap-2 mt-4"><button onclick="document.getElementById('modalLink').classList.add('hidden')" class="px-3 py-2 text-sm border border-gray-200 rounded-lg hover:bg-gray-50">Cancelar</button><button class="px-4 py-2 text-sm bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">Vincular</button></div>
     </div>
 </div>
-<!-- Header -->
-<div class="flex items-start justify-between mb-4">
-    <div>
-        <div class="flex items-center gap-2 mb-1">
-            <a asp-controller="Tickets" asp-action="Index" class="text-sm text-gray-400 hover:text-gray-600">← Tickets</a>
-            <span class="text-gray-300">/</span>
-            <span class="text-sm font-medium text-gray-700">#100249</span>
+<!-- Page Banner -->
+<div class="relative mb-6 rounded-2xl overflow-hidden shadow-lg" style="background-image: url('/img/fondo1.png'); background-size: cover; background-position: center;">
+    <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(29,78,216,0.82) 0%, rgba(37,99,235,0.78) 45%, rgba(14,165,233,0.72) 100%);"></div>
+    <div class="absolute -top-10 -right-10 w-52 h-52 rounded-full opacity-20" style="background:radial-gradient(circle, #bfdbfe, transparent 70%);"></div>
+    <div class="absolute bottom-0 left-1/3 w-72 h-24 rounded-full opacity-10" style="background:radial-gradient(ellipse, #fff, transparent 70%);"></div>
+    <div class="absolute top-0 left-0 w-40 h-40 rounded-full opacity-10" style="background:radial-gradient(circle, #60a5fa, transparent 70%);"></div>
+    <div class="absolute inset-0 opacity-5" style="background-image:repeating-linear-gradient(0deg,transparent,transparent 30px,rgba(255,255,255,.6) 30px,rgba(255,255,255,.6) 31px),repeating-linear-gradient(90deg,transparent,transparent 30px,rgba(255,255,255,.6) 30px,rgba(255,255,255,.6) 31px);"></div>
+    <div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-7 py-5">
+        <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-white/20 ring-2 ring-white/30 flex items-center justify-center text-2xl shadow-inner select-none">🎫</div>
+            <div>
+                <div class="flex items-center gap-2 mb-1">
+                    <a asp-controller="Tickets" asp-action="Index" class="text-blue-300 hover:text-white text-xs transition-colors">← Tickets</a>
+                    <span class="text-blue-400/50">/</span>
+                    <span class="text-blue-200 text-xs font-medium">#100249</span>
+                </div>
+                <h1 class="text-xl font-extrabold text-white leading-tight drop-shadow-sm">Acceso VPN bloqueado</h1>
+                <div class="flex flex-wrap items-center gap-2 mt-1.5">
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-400/30 text-blue-100 ring-1 ring-blue-300/40">Abierto</span>
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-400/30 text-red-100 ring-1 ring-red-300/40">Urgente</span>
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-white/10 text-blue-100">Soporte Técnico</span>
+                    <span class="text-xs text-red-300 font-medium">⚠ SLA vencido</span>
+                </div>
+            </div>
         </div>
-        <h1 class="text-xl font-bold text-gray-900">Acceso VPN bloqueado</h1>
-        <div class="flex flex-wrap items-center gap-2 mt-2">
-            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-700">Abierto</span>
-            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700">Urgente</span>
-            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Soporte Técnico</span>
-            <span class="text-xs text-red-600 font-medium">⚠ SLA vencido</span>
+        <div class="flex gap-2 flex-shrink-0">
+            <button onclick="document.getElementById('modalTransfer').classList.remove('hidden')" class="px-3 py-2 text-xs bg-white/10 hover:bg-white/20 text-white rounded-lg border border-white/20 transition-colors">↗️ Transferir</button>
+            <button onclick="document.getElementById('modalMerge').classList.remove('hidden')" class="px-3 py-2 text-xs bg-white/10 hover:bg-white/20 text-white rounded-lg border border-white/20 transition-colors">🔀 Fusionar</button>
+            <button onclick="document.getElementById('modalLink').classList.remove('hidden')" class="px-3 py-2 text-xs bg-white/10 hover:bg-white/20 text-white rounded-lg border border-white/20 transition-colors">🔗 Vincular</button>
         </div>
-    </div>
-    <div class="flex gap-2 flex-shrink-0">
-        <button onclick="document.getElementById('modalTransfer').classList.remove('hidden')" class="px-3 py-2 text-xs border border-gray-200 rounded-lg hover:bg-gray-50">↗️ Transferir</button>
-        <button onclick="document.getElementById('modalMerge').classList.remove('hidden')" class="px-3 py-2 text-xs border border-gray-200 rounded-lg hover:bg-gray-50">🔀 Fusionar</button>
-        <button onclick="document.getElementById('modalLink').classList.remove('hidden')" class="px-3 py-2 text-xs border border-gray-200 rounded-lg hover:bg-gray-50">🔗 Vincular</button>
     </div>
 </div>
 <div class="grid grid-cols-3 gap-5">
@@ -73,7 +83,7 @@
                 <div class="flex items-start gap-3 mb-3">
                     <div class="w-8 h-8 rounded-full bg-indigo-500 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">VR</div>
                     <div class="flex-1">
-                        <div class="flex items-center justify-between"><span class="text-sm font-semibold text-gray-800">Valentina Ruiz</span><span class="text-xs text-gray-400">Hoy 10:45 AM</span></div>
+                        <div class="flex items-center justify-between"><span class="text-sm font-semibold text-gray-800">Matias Robles</span><span class="text-xs text-gray-400">Hoy 10:45 AM</span></div>
                         <div class="flex items-center gap-1 text-xs text-amber-600 font-medium">🔒 Nota interna</div>
                     </div>
                 </div>
@@ -84,7 +94,7 @@
                 <div class="flex items-start gap-3 mb-3">
                     <div class="w-8 h-8 rounded-full bg-indigo-500 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">VR</div>
                     <div class="flex-1">
-                        <div class="flex items-center justify-between"><span class="text-sm font-semibold text-gray-800">Valentina Ruiz</span><span class="text-xs text-gray-400">Hoy 11:02 AM</span></div>
+                        <div class="flex items-center justify-between"><span class="text-sm font-semibold text-gray-800">Matias Robles</span><span class="text-xs text-gray-400">Hoy 11:02 AM</span></div>
                         <div class="text-xs text-gray-400">Agente → Cliente</div>
                     </div>
                 </div>
@@ -129,7 +139,7 @@
                     <div class="text-xs text-gray-400 mb-1">Agente</div>
                     <div class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-gray-100">
                         <div class="w-7 h-7 rounded-full bg-indigo-500 text-white text-[10px] font-bold flex items-center justify-center">VR</div>
-                        <div><div class="text-xs font-medium text-gray-800">Valentina Ruiz</div><div class="text-[10px] text-gray-400">Senior Support</div></div>
+                        <div><div class="text-xs font-medium text-gray-800">Matias Robles</div><div class="text-[10px] text-gray-400">Senior Support</div></div>
                     </div>
                     <button class="mt-1.5 w-full text-xs text-indigo-500 hover:underline text-left">Cambiar agente</button>
                 </div>

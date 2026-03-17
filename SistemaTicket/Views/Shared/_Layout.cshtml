@@ -98,9 +98,9 @@
             <!-- User area -->
             <div class="flex items-center gap-3">
                 <div class="hidden sm:flex items-center gap-2">
-                    <div class="w-8 h-8 rounded-full bg-indigo-500 text-white flex items-center justify-content-center text-xs font-bold flex items-center justify-center">VR</div>
+                    <div class="w-8 h-8 rounded-full bg-indigo-500 text-white flex items-center justify-content-center text-xs font-bold flex items-center justify-center">MR</div>
                     <div class="text-right">
-                        <p class="text-xs text-white font-medium leading-none">Valentina Ruiz</p>
+                        <p class="text-xs text-white font-medium leading-none">Matias Robles</p>
                         <p class="text-xs text-indigo-300 leading-none mt-0.5">Administrador</p>
                     </div>
                 </div>
@@ -109,7 +109,8 @@
     </header>
 
     <!-- Page content -->
-    <main class="flex-1 px-4 sm:px-6 py-6 max-w-screen-2xl mx-auto w-full">
+    <main class="flex-1 px-4 sm:px-6 py-6 max-w-screen-2xl mx-auto w-full relative">
+        <div class="absolute inset-0 -z-10 pointer-events-none" style="background-image: url('/img/fondo4.png'); background-size: cover; background-position: center; background-attachment: fixed; opacity: 0.30;"></div>
         @RenderBody()
     </main>
 

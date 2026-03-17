@@ -4,8 +4,8 @@
 
     string NavCls(string action, string ctrl = "Admin")
         => (currentAction == action && currentController == ctrl)
-            ? "flex items-center gap-2.5 px-4 py-2 text-sm rounded-lg bg-indigo-500/20 text-indigo-200 font-medium border-l-2 border-indigo-400 mx-2"
-            : "flex items-center gap-2.5 px-4 py-2 text-sm rounded-lg text-slate-300 hover:bg-white/5 hover:text-white transition-colors border-l-2 border-transparent mx-2";
+            ? "flex items-center gap-2.5 px-4 py-2 text-sm rounded-lg bg-white/15 text-white font-medium border-l-2 border-white/60 mx-2"
+            : "flex items-center gap-2.5 px-4 py-2 text-sm rounded-lg text-slate-300 hover:bg-white/10 hover:text-white transition-colors border-l-2 border-transparent mx-2";
 }
 <!DOCTYPE html>
 <html lang="es">
@@ -53,9 +53,11 @@
 <div class="flex h-screen overflow-hidden">
 
     <!-- ── SIDEBAR ── -->
-    <aside class="w-64 min-w-[256px] bg-[#1e1b4b] flex flex-col overflow-y-auto shadow-xl">
+    <aside class="w-64 min-w-[256px] flex flex-col shadow-xl relative bg-black">
+        <div class="absolute inset-0 z-0" style="background-image: url('/img/fondo3.png'); background-size: cover; background-position: center; opacity: 0.45;"></div>
+        <div class="absolute inset-0 z-0" style="background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.0) 100%);"></div>
         <!-- Brand -->
-        <div class="px-5 py-4 border-b border-white/10">
+        <div class="relative z-10 px-5 py-4 border-b border-white/10">
             <div class="flex items-center gap-2">
                 <span class="text-indigo-300 text-2xl">🎫</span>
                 <div>
@@ -65,7 +67,7 @@
             </div>
         </div>
 
-        <nav class="flex-1 py-3 space-y-0.5">
+        <nav class="relative z-10 flex-1 py-3 space-y-0.5 overflow-y-auto">
             <a asp-controller="Admin" asp-action="Index" class="@NavCls("Index")">
                 <span>📊</span> Dashboard
             </a>
@@ -95,11 +97,11 @@
         </nav>
 
         <!-- User card -->
-        <div class="px-4 py-3 border-t border-white/10">
+        <div class="relative z-10 px-4 py-3 border-t border-white/10">
             <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-full bg-indigo-500 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">VR</div>
+                <div class="w-8 h-8 rounded-full bg-indigo-500 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">MR</div>
                 <div class="min-w-0">
-                    <p class="text-sm text-white font-medium leading-none truncate">Valentina Ruiz</p>
+                    <p class="text-sm text-white font-medium leading-none truncate">Matias Robles</p>
                     <p class="text-xs text-indigo-300 mt-0.5">Administrador</p>
                 </div>
                 <span class="ml-auto w-2 h-2 rounded-full bg-emerald-400 flex-shrink-0"></span>
@@ -128,7 +130,10 @@
         </div>
 
         <!-- Content -->
-        <div class="flex-1 overflow-y-auto bg-slate-50 p-6">
+        <div class="flex-1 overflow-y-auto p-6 relative" style="@(ViewData["BodyStyle"] != null ? ViewData["BodyStyle"] : "")">
+            @if (ViewData["BodyStyle"] == null) {
+            <div class="absolute inset-0 -z-10 pointer-events-none" style="background-image: url('/img/fondo4.png'); background-size: cover; background-position: center; background-attachment: fixed; opacity: 0.30;"></div>
+            }
             @RenderBody()
         </div>
     </div>

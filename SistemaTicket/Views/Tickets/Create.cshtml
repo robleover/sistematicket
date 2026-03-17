@@ -2,95 +2,291 @@
     ViewData["Title"] = "Nuevo Ticket";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="flex items-center justify-between mb-5">
-    <div>
-        <h1 class="text-xl font-bold text-gray-900">➕ Nuevo Ticket</h1>
-        <p class="text-sm text-gray-500 mt-0.5">Sección 7.2 — Creación de tickets por agente</p>
+
+<!-- Page Banner -->
+<div class="relative mb-6 rounded-2xl overflow-hidden shadow-lg" style="background-image: url('/img/fondo1.png'); background-size: cover; background-position: center;">
+    <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(29,78,216,0.82) 0%, rgba(37,99,235,0.78) 45%, rgba(14,165,233,0.72) 100%);"></div>
+    <div class="absolute -top-10 -right-10 w-52 h-52 rounded-full opacity-20" style="background:radial-gradient(circle, #bfdbfe, transparent 70%);"></div>
+    <div class="absolute bottom-0 left-1/3 w-72 h-24 rounded-full opacity-10" style="background:radial-gradient(ellipse, #fff, transparent 70%);"></div>
+    <div class="absolute top-0 left-0 w-40 h-40 rounded-full opacity-10" style="background:radial-gradient(circle, #60a5fa, transparent 70%);"></div>
+    <div class="absolute inset-0 opacity-5" style="background-image:repeating-linear-gradient(0deg,transparent,transparent 30px,rgba(255,255,255,.6) 30px,rgba(255,255,255,.6) 31px),repeating-linear-gradient(90deg,transparent,transparent 30px,rgba(255,255,255,.6) 30px,rgba(255,255,255,.6) 31px);"></div>
+    <div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-7 py-5">
+        <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-white/20 ring-2 ring-white/30 flex items-center justify-center text-2xl shadow-inner select-none">➕</div>
+            <div>
+                <p class="text-blue-200 text-xs font-semibold uppercase tracking-widest mb-0.5">Gestión de Tickets</p>
+                <h1 class="text-xl font-extrabold text-white leading-tight drop-shadow-sm">Crear nuevo ticket</h1>
+                <p class="text-blue-200/80 text-xs mt-0.5">Completa los campos y el ticket quedará asignado automáticamente.</p>
+            </div>
+        </div>
+        <a asp-controller="Tickets" asp-action="Index"
+           class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-blue-700 text-sm font-bold shadow-md hover:bg-blue-50 active:scale-95 transition-all flex-shrink-0">
+            ← Volver
+        </a>
     </div>
-    <a asp-controller="Tickets" asp-action="Index" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-gray-200 text-sm text-gray-600 hover:bg-gray-50">← Volver</a>
 </div>
+
+<!-- Aviso informativo -->
+<div class="flex items-start gap-3 bg-indigo-50 border border-indigo-200 rounded-xl px-4 py-3 text-sm text-indigo-800 mb-5">
+    <span class="text-lg flex-shrink-0 mt-0.5">📌</span>
+    <span>Al crear el ticket el usuario recibirá un email de confirmación con su número de seguimiento. Los campos con <strong class="text-red-500">*</strong> son obligatorios.</span>
+</div>
+
 <!-- Modo de creación -->
-<div class="grid grid-cols-2 gap-3 max-w-sm mb-6">
-    <button id="modeAgent" onclick="setMode('agent')" class="flex flex-col items-center gap-1.5 p-4 rounded-xl border-2 border-indigo-500 bg-indigo-50 text-indigo-700">
-        <span class="text-2xl">🧑‍💼</span><span class="text-sm font-semibold">Agente</span><span class="text-xs text-indigo-500">Crea por un cliente</span>
+<div class="grid grid-cols-2 gap-3 max-w-xs mb-6">
+    <button id="modeAgent" onclick="setMode('agent')"
+        class="flex flex-col items-center gap-1.5 p-4 rounded-2xl border-2 border-indigo-500 bg-indigo-50 text-indigo-700 transition-colors">
+        <span class="text-2xl">🧑‍💼</span>
+        <span class="text-sm font-semibold">Agente</span>
+        <span class="text-xs text-indigo-500">Crea por un cliente</span>
     </button>
-    <button id="modePortal" onclick="setMode('portal')" class="flex flex-col items-center gap-1.5 p-4 rounded-xl border-2 border-gray-200 bg-white text-gray-500 hover:border-gray-300">
-        <span class="text-2xl">👤</span><span class="text-sm font-semibold">Portal cliente</span><span class="text-xs text-gray-400">Simular cliente</span>
+    <button id="modePortal" onclick="setMode('portal')"
+        class="flex flex-col items-center gap-1.5 p-4 rounded-2xl border-2 border-gray-200 bg-white text-gray-500 hover:border-gray-300 transition-colors">
+        <span class="text-2xl">👤</span>
+        <span class="text-sm font-semibold">Portal cliente</span>
+        <span class="text-xs text-gray-400">Simular cliente</span>
     </button>
 </div>
-<div class="grid grid-cols-3 gap-5">
-    <!-- Formulario principal -->
-    <div class="col-span-2 space-y-4">
+
+<form class="grid grid-cols-3 gap-5">
+    <!-- ── Columna principal (2/3) ── -->
+    <div class="col-span-2 flex flex-col gap-5">
+
         <!-- Datos del usuario -->
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
-            <h2 class="font-semibold text-gray-800 mb-3">👤 Datos del usuario</h2>
-            <div class="grid grid-cols-2 gap-3">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-100 flex items-center gap-2">
+                <span class="text-base">👤</span>
+                <span class="font-semibold text-gray-800 text-sm">Datos del usuario</span>
+            </div>
+            <div class="px-6 py-5 grid grid-cols-2 gap-4">
                 <div class="col-span-2">
-                    <label class="block text-xs font-medium text-gray-600 mb-1">Buscar usuario</label>
-                    <div class="relative"><input type="text" placeholder="Email o nombre..." class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm pr-20 focus:outline-none focus:ring-2 focus:ring-indigo-300" /><button class="absolute right-2 top-1/2 -translate-y-1/2 px-2 py-1 text-xs bg-indigo-600 text-white rounded-md">Buscar</button></div>
-                </div>
-                <div><label class="block text-xs font-medium text-gray-600 mb-1">Nombre completo <span class="text-red-400">*</span></label><input type="text" placeholder="Juan Pérez" class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" /></div>
-                <div><label class="block text-xs font-medium text-gray-600 mb-1">Correo electrónico <span class="text-red-400">*</span></label><input type="email" placeholder="juan@empresa.com" class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" /></div>
-                <div><label class="block text-xs font-medium text-gray-600 mb-1">Teléfono</label><input type="text" placeholder="+54 9 11 1234-5678" class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" /></div>
-                <div><label class="block text-xs font-medium text-gray-600 mb-1">Organización</label><input type="text" placeholder="Empresa S.A." class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" /></div>
-            </div>
-        </div>
-        <!-- Detalles del ticket -->
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
-            <h2 class="font-semibold text-gray-800 mb-3">📋 Detalles del ticket</h2>
-            <div class="space-y-3">
-                <div><label class="block text-xs font-medium text-gray-600 mb-1">Tema de ayuda <span class="text-red-400">*</span></label><select class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"><option value="">-- Seleccionar --</option><option>Soporte de acceso</option><option>Problema de software</option><option>Problema de hardware</option><option>Consulta de facturación</option></select></div>
-                <div><label class="block text-xs font-medium text-gray-600 mb-1">Asunto <span class="text-red-400">*</span></label><input type="text" placeholder="Descripción breve del problema..." class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" /></div>
-                <div>
-                    <div class="flex items-center justify-between mb-1">
-                        <label class="block text-xs font-medium text-gray-600">Descripción <span class="text-red-400">*</span></label>
-                        <button class="text-xs text-indigo-500 hover:underline">📝 Respuesta enlatada</button>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1.5">Buscar usuario existente</label>
+                    <div class="relative">
+                        <input type="text" placeholder="Email o nombre del cliente..."
+                            class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm pr-24 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-shadow" />
+                        <button type="button" class="absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1.5 text-xs bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors">Buscar</button>
                     </div>
-                    <textarea rows="6" placeholder="Describe el problema en detalle..." class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"></textarea>
+                    <p class="text-[11px] text-gray-400 mt-1">Si el usuario no existe, completa los campos a continuación</p>
                 </div>
-                <div><label class="block text-xs font-medium text-gray-600 mb-1">Adjuntos</label><input type="file" multiple class="block w-full text-sm text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-medium file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" /></div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1.5">Nombre completo <span class="text-red-500">*</span></label>
+                    <input type="text" placeholder="Juan Pérez"
+                        class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-shadow" />
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1.5">Correo electrónico <span class="text-red-500">*</span></label>
+                    <input type="email" placeholder="juan@empresa.com"
+                        class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-shadow" />
+                    <p class="text-[11px] text-gray-400 mt-1">Recibirá notificaciones en este email</p>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1.5">Teléfono</label>
+                    <input type="tel" placeholder="+54 9 11 1234-5678"
+                        class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-shadow" />
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1.5">Organización</label>
+                    <input type="text" placeholder="Empresa S.A."
+                        class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-shadow" />
+                </div>
             </div>
         </div>
-        <!-- Nota interna opcional -->
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
-            <h2 class="font-semibold text-gray-800 mb-3">🔒 Nota interna (opcional)</h2>
-            <textarea rows="3" placeholder="Agrega notas internas visibles solo para el equipo..." class="w-full rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-300"></textarea>
+
+        <!-- Detalles del ticket -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-100 flex items-center gap-2">
+                <span class="text-base">📋</span>
+                <span class="font-semibold text-gray-800 text-sm">Detalles del ticket</span>
+            </div>
+            <div class="px-6 py-5 flex flex-col gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1.5">Tema de ayuda <span class="text-red-500">*</span></label>
+                    <select class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white">
+                        <option value="">— Selecciona el tipo de solicitud —</option>
+                        <optgroup label="💻 Soporte Técnico — Software">
+                            <option>Acceso / Login</option>
+                            <option>Reportes y exportación</option>
+                            <option>Instalación de software</option>
+                        </optgroup>
+                        <optgroup label="🖥️ Soporte Técnico — Hardware">
+                            <option>Falla de equipo</option>
+                            <option>Solicitud de nuevo equipo</option>
+                        </optgroup>
+                        <optgroup label="🌐 Conectividad">
+                            <option>Conectividad / Red / VPN</option>
+                        </optgroup>
+                        <optgroup label="🧾 Facturación">
+                            <option>Consulta de factura</option>
+                            <option>Corrección de datos</option>
+                        </optgroup>
+                        <optgroup label="👥 Recursos Humanos">
+                            <option>Solicitud de personal</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1.5">Asunto <span class="text-red-500">*</span></label>
+                    <input type="text" placeholder="Descripción breve del problema (máx. 120 caracteres)" maxlength="120"
+                        class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-shadow" />
+                </div>
+                <div>
+                    <div class="flex items-center justify-between mb-1.5">
+                        <label class="block text-xs font-semibold text-gray-700">Descripción detallada <span class="text-red-500">*</span></label>
+                        <button type="button" class="text-xs text-indigo-500 hover:text-indigo-700 hover:underline font-medium">📝 Respuesta enlatada</button>
+                    </div>
+                    <textarea rows="6"
+                        placeholder="Describe el problema con el mayor detalle posible:&#10;• ¿Qué estabas haciendo cuando ocurrió?&#10;• ¿Qué mensaje de error aparece?&#10;• ¿Cuándo comenzó el problema?&#10;• ¿Afecta a otros usuarios?"
+                        class="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-shadow resize-none"></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1.5">Archivos adjuntos</label>
+                    <label class="flex items-center gap-3 w-full rounded-xl border-2 border-dashed border-gray-200 px-4 py-4 cursor-pointer hover:border-indigo-300 hover:bg-indigo-50/30 transition-colors">
+                        <span class="text-2xl">📎</span>
+                        <div>
+                            <div class="text-sm font-medium text-gray-700">Haz clic para adjuntar archivos</div>
+                            <div class="text-[11px] text-gray-400">Capturas, logs o documentos. Máx. 20 MB por archivo.</div>
+                        </div>
+                        <input type="file" multiple class="hidden" />
+                    </label>
+                </div>
+            </div>
         </div>
+
+        <!-- Nota interna -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="px-6 py-4 border-b border-amber-100 bg-amber-50/50 flex items-center gap-2">
+                <span class="text-base">🔒</span>
+                <span class="font-semibold text-amber-800 text-sm">Nota interna</span>
+                <span class="ml-1 text-xs text-amber-500 font-medium">(solo visible para el equipo)</span>
+            </div>
+            <div class="px-6 py-5">
+                <textarea rows="3" placeholder="Agrega contexto interno o instrucciones para el agente asignado..."
+                    class="w-full rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-amber-300 transition-shadow resize-none"></textarea>
+            </div>
+        </div>
+
     </div>
-    <!-- Panel de configuración -->
-    <div class="space-y-4">
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
-            <h2 class="font-semibold text-gray-800 mb-3">⚙️ Configuración</h2>
-            <div class="space-y-3">
-                <div><label class="block text-xs font-medium text-gray-600 mb-1">Departamento</label><select class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"><option>Soporte Técnico</option><option>Hardware</option><option>Facturación</option><option>RRHH</option></select></div>
-                <div><label class="block text-xs font-medium text-gray-600 mb-1">Asignar a</label><select class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"><option value="">Sin asignar</option><option>Valentina Ruiz</option><option>Matías Fernández</option><option>Sofía Morales</option><option>Diego Castillo</option></select></div>
-                <div><label class="block text-xs font-medium text-gray-600 mb-1">Equipo</label><select class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"><option value="">Sin equipo</option><option>Nivel 1</option><option>Nivel 2</option><option>Red y Comunicaciones</option></select></div>
-                <div><label class="block text-xs font-medium text-gray-600 mb-1">Prioridad</label><select class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"><option>Normal</option><option>Baja</option><option>Alta</option><option>Urgente</option></select></div>
-                <div><label class="block text-xs font-medium text-gray-600 mb-1">SLA</label><select class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"><option>Normal — 24h</option><option>Alta — 8h</option><option>Crítico — 2h</option></select></div>
-                <div><label class="block text-xs font-medium text-gray-600 mb-1">Vencimiento</label><input type="datetime-local" class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" /></div>
+
+    <!-- ── Sidebar de configuración (1/3) ── -->
+    <div class="flex flex-col gap-5">
+
+        <!-- Asignación y prioridad -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-100 flex items-center gap-2">
+                <span class="text-base">⚙️</span>
+                <span class="font-semibold text-gray-800 text-sm">Configuración</span>
+            </div>
+            <div class="px-6 py-5 flex flex-col gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1.5">Departamento</label>
+                    <select class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white">
+                        <option>Soporte Técnico</option>
+                        <option>Hardware</option>
+                        <option>Facturación</option>
+                        <option>RRHH</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1.5">Asignar a</label>
+                    <select class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white">
+                        <option value="">Sin asignar</option>
+                        <option>Matias Robles</option>
+                        <option>Matías Fernández</option>
+                        <option>Sofía Morales</option>
+                        <option>Diego Castillo</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1.5">Equipo</label>
+                    <select class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white">
+                        <option value="">Sin equipo</option>
+                        <option>Nivel 1</option>
+                        <option>Nivel 2</option>
+                        <option>Red y Comunicaciones</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1.5">Prioridad</label>
+                    <select class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white">
+                        <option>Normal</option>
+                        <option>Baja</option>
+                        <option>Alta</option>
+                        <option>Urgente</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1.5">SLA</label>
+                    <select class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white">
+                        <option>Normal — 24h</option>
+                        <option>Alta — 8h</option>
+                        <option>Crítico — 2h</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1.5">Vencimiento</label>
+                    <input type="datetime-local"
+                        class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-shadow" />
+                </div>
             </div>
         </div>
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
-            <h2 class="font-semibold text-gray-800 mb-3">📢 Notificaciones</h2>
-            <div class="space-y-2">
-                <label class="flex items-center gap-2 text-sm text-gray-600"><input type="checkbox" class="rounded text-indigo-600 focus:ring-indigo-300" checked /> Notificar al usuario</label>
-                <label class="flex items-center gap-2 text-sm text-gray-600"><input type="checkbox" class="rounded text-indigo-600 focus:ring-indigo-300" checked /> Notificar al agente</label>
-                <label class="flex items-center gap-2 text-sm text-gray-600"><input type="checkbox" class="rounded text-indigo-600 focus:ring-indigo-300" /> Confirmar al creador</label>
+
+        <!-- Notificaciones -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-100 flex items-center gap-2">
+                <span class="text-base">📢</span>
+                <span class="font-semibold text-gray-800 text-sm">Notificaciones</span>
+            </div>
+            <div class="px-6 py-5 flex flex-col gap-2.5">
+                <label class="flex items-center gap-2.5 text-sm text-gray-600 cursor-pointer">
+                    <input type="checkbox" class="rounded text-indigo-600 focus:ring-indigo-300" checked />
+                    Notificar al usuario
+                </label>
+                <label class="flex items-center gap-2.5 text-sm text-gray-600 cursor-pointer">
+                    <input type="checkbox" class="rounded text-indigo-600 focus:ring-indigo-300" checked />
+                    Notificar al agente
+                </label>
+                <label class="flex items-center gap-2.5 text-sm text-gray-600 cursor-pointer">
+                    <input type="checkbox" class="rounded text-indigo-600 focus:ring-indigo-300" />
+                    Confirmar al creador
+                </label>
             </div>
         </div>
-        <button class="w-full py-2.5 rounded-lg bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 transition-colors">✅ Crear Ticket</button>
+
+        <!-- Botón submit -->
+        <button type="submit"
+            class="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm transition-colors shadow-md shadow-indigo-200">
+            <span>📨</span> Crear Ticket
+        </button>
+
+        <!-- Qué ocurre después -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 px-5 py-5">
+            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">¿Qué ocurre después?</p>
+            <div class="flex flex-col gap-3">
+                <div class="flex items-start gap-3">
+                    <div class="w-5 h-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">1</div>
+                    <p class="text-xs text-gray-600">El usuario recibe un email con el número de ticket <span class="font-mono text-gray-800">(#XXXXXX)</span></p>
+                </div>
+                <div class="flex items-start gap-3">
+                    <div class="w-5 h-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">2</div>
+                    <p class="text-xs text-gray-600">El ticket se asigna al agente o departamento seleccionado</p>
+                </div>
+                <div class="flex items-start gap-3">
+                    <div class="w-5 h-5 rounded-full bg-indigo-600 text-white text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">3</div>
+                    <p class="text-xs text-gray-600">Ambas partes recibirán actualizaciones por email</p>
+                </div>
+            </div>
+        </div>
+
     </div>
-</div>
+</form>
+
 <script>
-function setMode(mode) {
-    var agent = document.getElementById('modeAgent');
-    var portal = document.getElementById('modePortal');
-    if (mode === 'agent') {
-        agent.className = agent.className.replace('border-gray-200 bg-white text-gray-500 hover:border-gray-300','').replace('border-indigo-500 bg-indigo-50 text-indigo-700','') + ' border-2 border-indigo-500 bg-indigo-50 text-indigo-700 flex flex-col items-center gap-1.5 p-4 rounded-xl';
-        portal.className = 'flex flex-col items-center gap-1.5 p-4 rounded-xl border-2 border-gray-200 bg-white text-gray-500 hover:border-gray-300';
-    } else {
-        portal.className = portal.className.replace('border-gray-200','') + ' border-indigo-500 bg-indigo-50 text-indigo-700 flex flex-col items-center gap-1.5 p-4 rounded-xl border-2';
-        agent.className = 'flex flex-col items-center gap-1.5 p-4 rounded-xl border-2 border-gray-200 bg-white text-gray-500 hover:border-gray-300';
+    function setMode(mode) {
+        var agent = document.getElementById('modeAgent');
+        var portal = document.getElementById('modePortal');
+        var activeClass = 'flex flex-col items-center gap-1.5 p-4 rounded-2xl border-2 border-indigo-500 bg-indigo-50 text-indigo-700 transition-colors';
+        var inactiveClass = 'flex flex-col items-center gap-1.5 p-4 rounded-2xl border-2 border-gray-200 bg-white text-gray-500 hover:border-gray-300 transition-colors';
+        agent.className = mode === 'agent' ? activeClass : inactiveClass;
+        portal.className = mode === 'portal' ? activeClass : inactiveClass;
     }
-}
 </script>

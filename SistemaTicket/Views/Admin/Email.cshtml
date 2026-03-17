@@ -3,9 +3,21 @@
     ViewData["Breadcrumb"] = "Correo Electrónico";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<div class="flex items-center justify-between mb-6">
-    <div><h1 class="text-xl font-bold text-gray-900">📧 Correo Electrónico</h1><p class="text-sm text-gray-500 mt-0.5">Cuentas de correo y configuración SMTP — Sección 6.2</p></div>
-    <button onclick="document.getElementById('newEmailModal').classList.remove('hidden')" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition-colors">➕ Nueva cuenta</button>
+<!-- Page Banner -->
+<div class="relative mb-6 rounded-2xl overflow-hidden shadow-lg" style="background-image: url('/img/fondo1.png'); background-size: cover; background-position: center;">
+    <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(29,78,216,0.82) 0%, rgba(37,99,235,0.78) 45%, rgba(14,165,233,0.72) 100%);"></div>
+    <div class="absolute inset-0 opacity-5" style="background-image:repeating-linear-gradient(0deg,transparent,transparent 30px,rgba(255,255,255,.6) 30px,rgba(255,255,255,.6) 31px),repeating-linear-gradient(90deg,transparent,transparent 30px,rgba(255,255,255,.6) 30px,rgba(255,255,255,.6) 31px);"></div>
+    <div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-7 py-5">
+        <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-white/20 ring-2 ring-white/30 flex items-center justify-center text-2xl shadow-inner select-none">📧</div>
+            <div>
+                <p class="text-blue-200 text-xs font-semibold uppercase tracking-widest mb-0.5">Admin Panel › Configuración</p>
+                <h1 class="text-xl font-extrabold text-white leading-tight drop-shadow-sm">Correo Electrónico</h1>
+                <p class="text-blue-200/80 text-xs mt-0.5">Cuentas de correo y configuración SMTP</p>
+            </div>
+        </div>
+        <button onclick="document.getElementById('newEmailModal').classList.remove('hidden')" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-blue-700 text-sm font-bold shadow-md hover:bg-blue-50 active:scale-95 transition-all flex-shrink-0">➕ Nueva cuenta</button>
+    </div>
 </div>
 <div class="border-b border-gray-200 mb-5">
     <nav class="-mb-px flex gap-1">

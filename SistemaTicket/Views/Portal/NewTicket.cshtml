@@ -27,14 +27,20 @@
         </div>
     </header>
 
-    <!-- Franja superior con título -->
-    <div class="bg-[#1e1b4b]/90 text-white py-8 px-4">
-        <div class="max-w-3xl mx-auto">
-            <div class="flex items-center gap-3 mb-1">
-                <div class="w-10 h-10 rounded-xl bg-indigo-500/40 flex items-center justify-center text-xl">🎫</div>
-                <h1 class="text-2xl font-bold">Abrir nuevo ticket</h1>
+    <!-- Banner -->
+    <div class="relative" style="background-image: url('/img/fondo1.png'); background-size: cover; background-position: center;">
+        <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(29,78,216,0.82) 0%, rgba(37,99,235,0.78) 45%, rgba(14,165,233,0.72) 100%);"></div>
+        <div class="absolute inset-0 opacity-5" style="background-image:repeating-linear-gradient(0deg,transparent,transparent 30px,rgba(255,255,255,.6) 30px,rgba(255,255,255,.6) 31px),repeating-linear-gradient(90deg,transparent,transparent 30px,rgba(255,255,255,.6) 30px,rgba(255,255,255,.6) 31px);"></div>
+        <div class="relative z-10 max-w-3xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-6 py-6">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-white/20 ring-2 ring-white/30 flex items-center justify-center text-2xl shadow-inner select-none">🎫</div>
+                <div>
+                    <p class="text-blue-200 text-xs font-semibold uppercase tracking-widest mb-0.5">Portal › Soporte</p>
+                    <h1 class="text-xl font-extrabold text-white leading-tight drop-shadow-sm">Abrir nuevo ticket</h1>
+                    <p class="text-blue-200/80 text-xs mt-0.5">Completa el formulario y recibirás confirmación por email</p>
+                </div>
             </div>
-            <p class="text-indigo-300 text-sm ml-13 pl-1">Completa el formulario y recibirás un email de confirmación con tu número de seguimiento.</p>
+            <a href="/Portal/MyTickets" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-blue-700 text-sm font-bold shadow-md hover:bg-blue-50 active:scale-95 transition-all flex-shrink-0">📋 Mis tickets</a>
         </div>
     </div>
 
@@ -196,7 +202,7 @@
 
     <!-- Footer -->
     <footer class="bg-[#1e1b4b] text-indigo-300 text-xs text-center py-4">
-        © 2026 SistemaTicket — Todos los derechos reservados
+        © 2026 SistemaTicket — Todos los derechos reservados · Desarrollado por <span class="font-semibold">SoftCapture Technologies</span>
     </footer>
 
 </body>

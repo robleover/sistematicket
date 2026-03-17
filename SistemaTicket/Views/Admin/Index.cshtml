@@ -4,15 +4,55 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<!-- Header -->
-<div class="flex items-center justify-between mb-6">
-    <div>
-        <h1 class="text-xl font-bold text-gray-900">Dashboard</h1>
-        <p class="text-sm text-gray-500 mt-0.5">Bienvenida, Valentina. Hoy es viernes 13 de marzo de 2026.</p>
+<!-- Hero Banner -->
+<div class="relative mb-6 rounded-2xl overflow-hidden shadow-lg" style="background-image: url('/img/fondo1.png'); background-size: cover; background-position: center;">
+    <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(29,78,216,0.82) 0%, rgba(37,99,235,0.78) 45%, rgba(14,165,233,0.72) 100%);"></div>
+    <!-- Decorative blobs -->
+    <div class="absolute -top-10 -right-10 w-52 h-52 rounded-full opacity-20" style="background:radial-gradient(circle, #bfdbfe, transparent 70%);"></div>
+    <div class="absolute bottom-0 left-1/3 w-72 h-24 rounded-full opacity-10" style="background:radial-gradient(ellipse, #fff, transparent 70%);"></div>
+    <div class="absolute top-0 left-0 w-40 h-40 rounded-full opacity-10" style="background:radial-gradient(circle, #60a5fa, transparent 70%);"></div>
+    <!-- Grid lines overlay -->
+    <div class="absolute inset-0 opacity-5" style="background-image:repeating-linear-gradient(0deg,transparent,transparent 30px,rgba(255,255,255,.6) 30px,rgba(255,255,255,.6) 31px),repeating-linear-gradient(90deg,transparent,transparent 30px,rgba(255,255,255,.6) 30px,rgba(255,255,255,.6) 31px);"></div>
+
+    <div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 px-7 py-6">
+        <!-- Left: avatar + greeting -->
+        <div class="flex items-center gap-5">
+            <!-- Avatar ring -->
+            <div class="relative flex-shrink-0">
+                <div class="w-16 h-16 rounded-full bg-white/20 ring-4 ring-white/30 flex items-center justify-center text-2xl font-extrabold text-white shadow-lg select-none">
+                    VR
+                </div>
+                <span class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-400 ring-2 ring-white shadow"></span>
+            </div>
+            <!-- Text -->
+            <div>
+                <p class="text-blue-200 text-xs font-semibold uppercase tracking-widest mb-0.5">Panel de Administración</p>
+                <h1 class="text-2xl font-extrabold text-white leading-tight drop-shadow-sm">
+                    ¡Bienvenido, Matias! 👋
+                </h1>
+                <div class="mt-1.5 flex items-center gap-2 text-blue-200 text-sm">
+                    <span class="inline-flex items-center gap-1">
+                        📅 <span class="font-medium">Viernes, 13 de marzo de 2026</span>
+                    </span>
+                    <span class="opacity-40">·</span>
+                    <span class="inline-flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse inline-block"></span>
+                        <span class="text-emerald-300 font-medium">En línea</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- Right: action button + mini stat -->
+        <div class="flex flex-col items-end gap-3 flex-shrink-0">
+            <a asp-controller="Tickets" asp-action="Create"
+               class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-blue-700 text-sm font-bold shadow-md hover:bg-blue-50 active:scale-95 transition-all">
+                ➕ Nuevo Ticket
+            </a>
+            <p class="text-blue-200/80 text-xs">
+                <span class="font-semibold text-white">38</span> tickets abiertos hoy
+            </p>
+        </div>
     </div>
-    <a asp-controller="Tickets" asp-action="Create" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition-colors">
-        ➕ Nuevo Ticket
-    </a>
 </div>
 
 <!-- KPI cards -->
@@ -151,8 +191,8 @@
             <div class="divide-y divide-gray-50">
                 <div class="flex items-center justify-between px-5 py-3">
                     <div class="flex items-center gap-2">
-                        <div class="w-7 h-7 rounded-full bg-indigo-100 text-indigo-600 text-xs font-bold flex items-center justify-center">VR</div>
-                        <span class="text-sm text-gray-700">Valentina Ruiz</span>
+                        <div class="w-7 h-7 rounded-full bg-indigo-100 text-indigo-600 text-xs font-bold flex items-center justify-center">MR</div>
+                        <span class="text-sm text-gray-700">Matias Robles</span>
                     </div>
                     <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-700">14</span>
                 </div>

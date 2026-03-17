@@ -3,29 +3,35 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row">
-    <div class="col-12">
-        <!-- Cabecera del ticket -->
-        <div class="d-flex justify-content-between align-items-start mb-3">
+<!-- Page Banner -->
+<div class="relative mb-6 rounded-2xl overflow-hidden shadow-lg" style="background-image: url('/img/fondo2.png'); background-size: cover; background-position: center;">
+    <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(29,78,216,0.82) 0%, rgba(37,99,235,0.78) 45%, rgba(14,165,233,0.72) 100%);"></div>
+    <div class="absolute -top-10 -right-10 w-52 h-52 rounded-full opacity-20" style="background:radial-gradient(circle, #bfdbfe, transparent 70%);"></div>
+    <div class="absolute bottom-0 left-1/3 w-72 h-24 rounded-full opacity-10" style="background:radial-gradient(ellipse, #fff, transparent 70%);"></div>
+    <div class="absolute top-0 left-0 w-40 h-40 rounded-full opacity-10" style="background:radial-gradient(circle, #60a5fa, transparent 70%);"></div>
+    <div class="absolute inset-0 opacity-5" style="background-image:repeating-linear-gradient(0deg,transparent,transparent 30px,rgba(255,255,255,.6) 30px,rgba(255,255,255,.6) 31px),repeating-linear-gradient(90deg,transparent,transparent 30px,rgba(255,255,255,.6) 30px,rgba(255,255,255,.6) 31px);"></div>
+    <div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-7 py-5">
+        <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-white/20 ring-2 ring-white/30 flex items-center justify-center text-2xl shadow-inner select-none">🎫</div>
             <div>
-                <div class="d-flex align-items-center gap-2 mb-1">
-                    <a asp-controller="Portal" asp-action="MyTickets" class="text-decoration-none text-muted small">← Mis Tickets</a>
-                    <span class="text-muted">/</span>
-                    <span class="small text-muted">Ticket #100248</span>
+                <div class="flex items-center gap-2 mb-1">
+                    <a asp-controller="Portal" asp-action="MyTickets" class="text-blue-300 hover:text-white text-xs transition-colors">← Mis Tickets</a>
+                    <span class="text-blue-400/50">/</span>
+                    <span class="text-blue-200 text-xs font-medium">#100248</span>
                 </div>
-                <h4 class="mb-1 fw-bold">No puedo acceder al sistema desde ayer</h4>
-                <div class="d-flex align-items-center gap-2 flex-wrap">
-                    <span class="badge bg-danger">Abierto</span>
-                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle">🔴 Urgente</span>
-                    <span class="text-muted small">Ticket #100248</span>
-                    <span class="text-muted small">•</span>
-                    <span class="text-muted small">Abierto el 15 ene 2025 09:15</span>
-                    <span class="text-muted small">•</span>
-                    <span class="text-muted small">Departamento: Soporte Técnico</span>
+                <h1 class="text-xl font-extrabold text-white leading-tight drop-shadow-sm">No puedo acceder al sistema desde ayer</h1>
+                <div class="flex flex-wrap items-center gap-2 mt-1.5">
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-400/30 text-red-100 ring-1 ring-red-300/40">Abierto</span>
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-500/30 text-red-100 ring-1 ring-red-400/40">🔴 Urgente</span>
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-white/10 text-blue-100">Soporte Técnico</span>
+                    <span class="text-xs text-blue-200">• Abierto el 15 ene 2025 09:15</span>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<div class="row">
 
     <!-- Columna principal: conversación -->
     <div class="col-lg-8">
@@ -59,7 +65,7 @@
                     <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center fw-bold small"
                          style="width:32px;height:32px;">VR</div>
                     <div>
-                        <span class="fw-semibold small">Valentina Ruiz</span>
+                        <span class="fw-semibold small">Matias Robles</span>
                         <span class="badge bg-success-subtle text-success small ms-1">Agente de soporte</span>
                     </div>
                 </div>
@@ -76,7 +82,7 @@
                     <li>Si solicita un código de verificación, revisa tu email con el código de 6 dígitos</li>
                 </ol>
                 <p class="mb-0">Avísame si el problema persiste y generaremos un nuevo token manualmente desde el panel de administración.</p>
-                <p class="text-muted small mt-2 mb-0">Valentina Ruiz — Soporte Técnico</p>
+                <p class="text-muted small mt-2 mb-0">Matias Robles — Soporte Técnico</p>
             </div>
         </div>
 
@@ -179,7 +185,7 @@
                     <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center fw-bold"
                          style="width:40px;height:40px;">VR</div>
                     <div>
-                        <div class="fw-semibold small">Valentina Ruiz</div>
+                        <div class="fw-semibold small">Matias Robles</div>
                         <div class="text-muted small">Soporte Técnico — Nivel 1</div>
                     </div>
                 </div>

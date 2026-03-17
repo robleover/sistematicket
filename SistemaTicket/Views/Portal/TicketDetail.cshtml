@@ -3,6 +3,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<!-- Modal reapertura -->
+<div id="modalReopen" class="hidden fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
+    <div class="bg-white rounded-xl shadow-xl w-full max-w-md mx-4 p-6">
+        <h3 class="font-semibold text-gray-900 mb-4">🔄 Solicitar Reapertura</h3>
+        <p class="text-xs text-gray-500 mb-3">Si el problema que reportaste no fue resuelto, puedes solicitar la reapertura del ticket.</p>
+        <div><label class="block text-xs font-medium text-gray-600 mb-1">Motivo de la reapertura</label><textarea rows="3" class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" placeholder="Explica por qué necesitas reabrir este ticket..."></textarea></div>
+        <div class="flex justify-end gap-2 mt-4"><button onclick="document.getElementById('modalReopen').classList.add('hidden')" class="px-3 py-2 text-sm border border-gray-200 rounded-lg hover:bg-gray-50">Cancelar</button><button class="px-4 py-2 text-sm bg-amber-500 text-white rounded-lg hover:bg-amber-600">🔄 Solicitar Reapertura</button></div>
+    </div>
+</div>
+
 <!-- Page Banner -->
 <div class="relative mb-6 rounded-2xl overflow-hidden shadow-lg" style="background-image: url('/img/fondo2.png'); background-size: cover; background-position: center;">
     <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(29,78,216,0.82) 0%, rgba(37,99,235,0.78) 45%, rgba(14,165,233,0.72) 100%);"></div>
@@ -31,236 +41,135 @@
     </div>
 </div>
 
-<div class="row">
-
-    <!-- Columna principal: conversación -->
-    <div class="col-lg-8">
-
-        <!-- Mensaje original del cliente -->
-        <div class="card border-0 shadow-sm mb-3">
-            <div class="card-header bg-white d-flex align-items-center justify-content-between">
-                <div class="d-flex align-items-center gap-2">
-                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold small"
-                         style="width:32px;height:32px;">PS</div>
-                    <div>
-                        <span class="fw-semibold small">Pedro Soto</span>
-                        <span class="text-muted small ms-1">(Tú)</span>
+<div class="grid grid-cols-3 gap-5">
+    <!-- Conversación -->
+    <div class="col-span-2 space-y-4">
+        <div class="space-y-3">
+            <!-- Mensaje original del cliente -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+                <div class="flex items-start gap-3 mb-3">
+                    <div class="w-8 h-8 rounded-full bg-sky-500 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">PS</div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between"><span class="text-sm font-semibold text-gray-800">Pedro Soto</span><span class="text-xs text-gray-400">15 ene 2025, 09:15</span></div>
+                        <div class="text-xs text-gray-400">pedro.soto@@empresa.cl <span class="text-sky-500 font-medium">(Tú)</span></div>
                     </div>
                 </div>
-                <small class="text-muted">15 ene 2025, 09:15</small>
-            </div>
-            <div class="card-body">
-                <p class="mb-0">Hola, desde ayer por la mañana no puedo ingresar al sistema de gestión. Aparece el siguiente error:</p>
-                <div class="alert alert-light border font-monospace small mt-2 mb-2">
-                    Error: "Authentication failed — token expired or invalid. Contact your administrator."
+                <div class="text-sm text-gray-700 pl-11">
+                    Hola, desde ayer por la mañana no puedo ingresar al sistema de gestión. Aparece el siguiente error:
+                    <div class="my-2 p-3 rounded-lg bg-gray-50 border border-gray-200 font-mono text-xs text-gray-600">Error: "Authentication failed — token expired or invalid. Contact your administrator."</div>
+                    El problema ocurre en Chrome y en Edge. Ya probé cerrar sesión y volver a entrar pero el error persiste.
                 </div>
-                <p class="mb-0">El problema ocurre en Chrome y en Edge. Ya probé cerrar sesión y volver a entrar pero el error persiste. Mi usuario es pedro.soto@@empresa.cl</p>
             </div>
-        </div>
 
-        <!-- Respuesta del agente -->
-        <div class="card border-0 shadow-sm mb-3" style="background-color:#f0f7ff;">
-            <div class="card-header d-flex align-items-center justify-content-between" style="background-color:#ddeeff;">
-                <div class="d-flex align-items-center gap-2">
-                    <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center fw-bold small"
-                         style="width:32px;height:32px;">VR</div>
-                    <div>
-                        <span class="fw-semibold small">Matias Robles</span>
-                        <span class="badge bg-success-subtle text-success small ms-1">Agente de soporte</span>
+            <!-- Respuesta del agente -->
+            <div class="bg-indigo-50 rounded-xl border border-indigo-100 p-5">
+                <div class="flex items-start gap-3 mb-3">
+                    <div class="w-8 h-8 rounded-full bg-indigo-500 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">VR</div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between"><span class="text-sm font-semibold text-gray-800">Matias Robles</span><span class="text-xs text-gray-400">15 ene 2025, 10:42</span></div>
+                        <div class="text-xs text-gray-400">Agente → Cliente</div>
                     </div>
                 </div>
-                <small class="text-muted">15 ene 2025, 10:42</small>
+                <div class="text-sm text-gray-700 pl-11">
+                    <p class="mb-2">Estimado Pedro,</p>
+                    <p class="mb-2">Gracias por contactarnos. He revisado tu cuenta y efectivamente el token de sesión expiró de forma forzada por un reinicio de seguridad que realizamos en el servidor.</p>
+                    <p class="mb-2">Por favor haz lo siguiente:</p>
+                    <ol class="list-decimal list-inside space-y-1 mb-2">
+                        <li>Abre el navegador en modo incógnito (Ctrl + Shift + N)</li>
+                        <li>Dirígete a <strong>sistema.empresa.cl/login</strong></li>
+                        <li>Ingresa tu usuario y contraseña habitual</li>
+                        <li>Si solicita un código de verificación, revisa tu email con el código de 6 dígitos</li>
+                    </ol>
+                    <p>Avísame si el problema persiste y generaremos un nuevo token manualmente desde el panel de administración.</p>
+                    <p class="text-gray-400 text-xs mt-2">Matias Robles — Soporte Técnico</p>
+                </div>
             </div>
-            <div class="card-body">
-                <p>Estimado Pedro,</p>
-                <p>Gracias por contactarnos. He revisado tu cuenta y efectivamente el token de sesión expiro de forma forzada por un reinicio de seguridad que realizamos en el servidor.</p>
-                <p>Por favor haz lo siguiente:</p>
-                <ol class="mb-2">
-                    <li>Abre el navegador en modo incógnito (Ctrl + Shift + N)</li>
-                    <li>Dirígete a <strong>sistema.empresa.cl/login</strong></li>
-                    <li>Ingresa tu usuario y contraseña habitual</li>
-                    <li>Si solicita un código de verificación, revisa tu email con el código de 6 dígitos</li>
-                </ol>
-                <p class="mb-0">Avísame si el problema persiste y generaremos un nuevo token manualmente desde el panel de administración.</p>
-                <p class="text-muted small mt-2 mb-0">Matias Robles — Soporte Técnico</p>
-            </div>
-        </div>
 
-        <!-- Segunda respuesta del cliente -->
-        <div class="card border-0 shadow-sm mb-3">
-            <div class="card-header bg-white d-flex align-items-center justify-content-between">
-                <div class="d-flex align-items-center gap-2">
-                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold small"
-                         style="width:32px;height:32px;">PS</div>
-                    <div>
-                        <span class="fw-semibold small">Pedro Soto</span>
-                        <span class="text-muted small ms-1">(Tú)</span>
+            <!-- Segunda respuesta del cliente -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+                <div class="flex items-start gap-3 mb-3">
+                    <div class="w-8 h-8 rounded-full bg-sky-500 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">PS</div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between"><span class="text-sm font-semibold text-gray-800">Pedro Soto</span><span class="text-xs text-gray-400">15 ene 2025, 11:05</span></div>
+                        <div class="text-xs text-gray-400">pedro.soto@@empresa.cl <span class="text-sky-500 font-medium">(Tú)</span></div>
                     </div>
                 </div>
-                <small class="text-muted">15 ene 2025, 11:05</small>
+                <div class="text-sm text-gray-700 pl-11">Seguí los pasos pero en el paso 4 no me llegó ningún código al email. Esperé 10 minutos y revisé el spam también. El acceso sigue bloqueado.</div>
             </div>
-            <div class="card-body">
-                <p class="mb-0">Seguí los pasos pero en el paso 4 no me llegó ningún código al email. Esperé 10 minutos y revisé el spam también. El acceso sigue bloqueado.</p>
-            </div>
-        </div>
 
-        <!-- Estado: esperando agente -->
-        <div class="alert alert-primary d-flex align-items-center gap-2 small mb-3">
-            <span>⏳</span>
-            <span>El agente ha sido notificado de tu última respuesta y trabajará en una solución. Te responderemos pronto.</span>
-        </div>
-
-        <!-- Formulario de respuesta del cliente -->
-        <div class="card border-0 shadow-sm">
-            <div class="card-header bg-white fw-semibold">💬 Añadir Respuesta</div>
-            <div class="card-body">
-                <textarea class="form-control mb-3" rows="5"
-                          placeholder="Escribe aquí tu respuesta o cualquier información adicional que pueda ayudar a resolver el problema..."></textarea>
-                <div class="mb-3">
-                    <label class="form-label small fw-semibold">Adjuntar archivos</label>
-                    <input type="file" class="form-control form-control-sm" multiple />
-                    <div class="form-text">Capturas de pantalla, logs, etc. Máx. 20 MB por archivo</div>
-                </div>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="markResolved" />
-                        <label class="form-check-label small" for="markResolved">
-                            ✅ Marcar como resuelto (el problema fue solucionado)
-                        </label>
-                    </div>
-                    <button class="btn btn-primary">📨 Enviar Respuesta</button>
-                </div>
+            <!-- Aviso de espera -->
+            <div class="flex items-center gap-2 px-4 py-3 bg-blue-50 border border-blue-100 rounded-xl text-sm text-blue-700">
+                <span>⏳</span>
+                <span>El agente ha sido notificado de tu última respuesta y trabajará en una solución. Te responderemos pronto.</span>
             </div>
         </div>
 
+        <!-- Panel de respuesta del cliente -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+            <h3 class="text-sm font-semibold text-gray-700 mb-3">💬 Añadir Respuesta</h3>
+            <textarea rows="5" placeholder="Escribe aquí tu respuesta o cualquier información adicional que pueda ayudar a resolver el problema..." class="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300 mb-3"></textarea>
+            <div class="mb-3">
+                <label class="block text-xs font-medium text-gray-600 mb-1">Adjuntar archivos</label>
+                <input type="file" multiple class="block w-full text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-medium file:bg-indigo-50 file:text-indigo-600 hover:file:bg-indigo-100" />
+                <p class="text-xs text-gray-400 mt-1">Capturas de pantalla, logs, etc. Máx. 20 MB por archivo</p>
+            </div>
+            <div class="flex items-center justify-between">
+                <label class="flex items-center gap-1.5 text-xs text-gray-500"><input type="checkbox" class="rounded text-indigo-600" /> Marcar como resuelto (el problema fue solucionado)</label>
+                <button class="text-xs px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium">📨 Enviar Respuesta</button>
+            </div>
+        </div>
     </div>
 
-    <!-- Columna lateral: info del ticket (versión cliente) -->
-    <div class="col-lg-4 mt-3 mt-lg-0">
-
-        <!-- Info básica -->
-        <div class="card border-0 shadow-sm mb-3">
-            <div class="card-header bg-white fw-semibold small">📋 Información del Ticket</div>
-            <div class="card-body p-0">
-                <table class="table table-sm mb-0 small">
-                    <tbody>
-                        <tr>
-                            <td class="text-muted ps-3">Número</td>
-                            <td class="fw-semibold pe-3">#100248</td>
-                        </tr>
-                        <tr>
-                            <td class="text-muted ps-3">Estado</td>
-                            <td class="pe-3"><span class="badge bg-danger">Abierto</span></td>
-                        </tr>
-                        <tr>
-                            <td class="text-muted ps-3">Prioridad</td>
-                            <td class="pe-3"><span class="badge bg-danger-subtle text-danger border border-danger-subtle small">🔴 Urgente</span></td>
-                        </tr>
-                        <tr>
-                            <td class="text-muted ps-3">Departamento</td>
-                            <td class="pe-3">Soporte Técnico</td>
-                        </tr>
-                        <tr>
-                            <td class="text-muted ps-3">Tipo</td>
-                            <td class="pe-3">Acceso / Login</td>
-                        </tr>
-                        <tr>
-                            <td class="text-muted ps-3">Creado</td>
-                            <td class="pe-3">15 ene 2025, 09:15</td>
-                        </tr>
-                        <tr>
-                            <td class="text-muted ps-3">Actualizado</td>
-                            <td class="pe-3">hace 1 hora</td>
-                        </tr>
-                    </tbody>
-                </table>
+    <!-- Sidebar -->
+    <div class="space-y-4">
+        <!-- Información del ticket -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+            <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Información del Ticket</h3>
+            <div class="space-y-3 text-xs">
+                <div class="flex justify-between"><span class="text-gray-400">Número</span><span class="font-semibold text-gray-700">#100248</span></div>
+                <div class="flex justify-between items-center"><span class="text-gray-400">Estado</span><span class="px-2 py-0.5 rounded-full bg-red-100 text-red-600 font-medium">Abierto</span></div>
+                <div class="flex justify-between items-center"><span class="text-gray-400">Prioridad</span><span class="px-2 py-0.5 rounded-full bg-red-50 text-red-600 border border-red-200 font-medium">🔴 Urgente</span></div>
+                <div class="flex justify-between"><span class="text-gray-400">Departamento</span><span class="text-gray-700">Soporte Técnico</span></div>
+                <div class="flex justify-between"><span class="text-gray-400">Tipo</span><span class="text-gray-700">Acceso / Login</span></div>
+                <div class="flex justify-between"><span class="text-gray-400">Creado</span><span class="text-gray-700">15 ene 2025, 09:15</span></div>
+                <div class="flex justify-between"><span class="text-gray-400">Actualizado</span><span class="text-gray-700">hace 1 hora</span></div>
+                <div class="pt-1 border-t border-gray-100"><span class="text-gray-400">SLA</span><p class="text-green-600 font-medium mt-0.5">✔ Respondido en 1h 27min</p></div>
             </div>
         </div>
 
         <!-- Agente asignado -->
-        <div class="card border-0 shadow-sm mb-3">
-            <div class="card-header bg-white fw-semibold small">👤 Agente Asignado</div>
-            <div class="card-body">
-                <div class="d-flex align-items-center gap-3">
-                    <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center fw-bold"
-                         style="width:40px;height:40px;">VR</div>
-                    <div>
-                        <div class="fw-semibold small">Matias Robles</div>
-                        <div class="text-muted small">Soporte Técnico — Nivel 1</div>
-                    </div>
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+            <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Agente Asignado</h3>
+            <div class="flex items-center gap-2">
+                <div class="w-9 h-9 rounded-full bg-indigo-500 text-white text-sm font-bold flex items-center justify-center flex-shrink-0">VR</div>
+                <div>
+                    <div class="text-sm font-medium text-gray-800">Matias Robles</div>
+                    <div class="text-xs text-gray-400">Soporte Técnico — Nivel 1</div>
                 </div>
             </div>
         </div>
 
-        <!-- SLA -->
-        <div class="card border-0 shadow-sm mb-3">
-            <div class="card-header bg-white fw-semibold small">⏱ Tiempo de Respuesta</div>
-            <div class="card-body">
-                <div class="d-flex justify-content-between small mb-1">
-                    <span class="text-muted">SLA objetivo:</span>
-                    <span>SLA Crítico — 1 hora</span>
-                </div>
-                <div class="d-flex justify-content-between small mb-2">
-                    <span class="text-muted">Primera respuesta:</span>
-                    <span class="text-success fw-semibold">✔ Respondido en 1h 27min</span>
-                </div>
-                <div class="progress" style="height:8px;">
-                    <div class="progress-bar bg-success" style="width:75%"></div>
-                </div>
-                <div class="small text-muted mt-1">Cumplimiento SLA: 75%</div>
+        <!-- Acciones -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+            <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Acciones</h3>
+            <div class="space-y-2">
+                <button class="w-full text-xs px-3 py-2 bg-green-50 text-green-700 border border-green-200 rounded-lg hover:bg-green-100 font-medium text-left">✅ Marcar como Resuelto</button>
+                <button onclick="document.getElementById('modalReopen').classList.remove('hidden')" class="w-full text-xs px-3 py-2 bg-amber-50 text-amber-700 border border-amber-200 rounded-lg hover:bg-amber-100 font-medium text-left">🔄 Solicitar Reapertura</button>
+                <a asp-controller="Portal" asp-action="NewTicket" class="block w-full text-xs px-3 py-2 bg-indigo-50 text-indigo-700 border border-indigo-200 rounded-lg hover:bg-indigo-100 font-medium text-center">➕ Abrir Nuevo Ticket</a>
+                <a asp-controller="Portal" asp-action="MyTickets" class="block w-full text-xs px-3 py-2 text-gray-400 hover:text-gray-600 text-center">← Volver a Mis Tickets</a>
             </div>
         </div>
 
-        <!-- Acciones del cliente -->
-        <div class="card border-0 shadow-sm mb-3">
-            <div class="card-header bg-white fw-semibold small">⚡ Acciones</div>
-            <div class="card-body d-grid gap-2">
-                <button class="btn btn-outline-success btn-sm">✅ Marcar como Resuelto</button>
-                <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#reopen">
-                    🔄 Solicitar Reapertura
-                </button>
-                <a asp-controller="Portal" asp-action="NewTicket" class="btn btn-outline-primary btn-sm">
-                    ➕ Abrir Nuevo Ticket
-                </a>
-                <a asp-controller="Portal" asp-action="MyTickets" class="btn btn-link btn-sm text-muted">
-                    ← Volver a Mis Tickets
-                </a>
-            </div>
-        </div>
-
-        <!-- Encuesta (si cerrado) -->
-        <div class="card border-0 shadow-sm border-top border-primary">
-            <div class="card-body text-center small">
-                <div class="fw-semibold mb-2">📊 Califica el servicio</div>
-                <div class="text-muted mb-2">Una vez cerrado el ticket podrás calificar la atención recibida</div>
-                <div class="d-flex justify-content-center gap-3" style="font-size:1.5rem;">
-                    <span role="button" title="Muy insatisfecho">😠</span>
-                    <span role="button" title="Insatisfecho">😕</span>
-                    <span role="button" title="Neutral">😐</span>
-                    <span role="button" title="Satisfecho">😊</span>
-                    <span role="button" title="Muy satisfecho">😄</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal reapertura -->
-<div class="modal fade" id="reopen" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">🔄 Solicitar Reapertura</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <p class="small text-muted">Si el problema que reportaste no fue resuelto, puedes solicitar la reapertura del ticket.</p>
-                <label class="form-label fw-semibold small">Motivo de la reapertura</label>
-                <textarea class="form-control" rows="3" placeholder="Explica por qué necesitas reabrir este ticket..."></textarea>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
-                <button class="btn btn-warning btn-sm">🔄 Solicitar Reapertura</button>
+        <!-- Calificación -->
+        <div class="bg-white rounded-xl shadow-sm border border-indigo-100 p-5">
+            <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Califica el servicio</h3>
+            <p class="text-xs text-gray-400 mb-3">Una vez cerrado el ticket podrás calificar la atención recibida.</p>
+            <div class="flex justify-center gap-3 text-2xl">
+                <span role="button" title="Muy insatisfecho" class="cursor-pointer hover:scale-125 transition-transform">😠</span>
+                <span role="button" title="Insatisfecho" class="cursor-pointer hover:scale-125 transition-transform">😕</span>
+                <span role="button" title="Neutral" class="cursor-pointer hover:scale-125 transition-transform">😐</span>
+                <span role="button" title="Satisfecho" class="cursor-pointer hover:scale-125 transition-transform">😊</span>
+                <span role="button" title="Muy satisfecho" class="cursor-pointer hover:scale-125 transition-transform">😄</span>
             </div>
         </div>
     </div>
